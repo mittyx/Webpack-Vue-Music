@@ -1,0 +1,13 @@
+{
+  "name": "Webpack-Vue-Music",
+  "version": "1.0.0",
+  "description": "parcel go to webpack4",
+  "main": "index.js",
+  "repository": "git@github.com:a851870/Webpack-Vue-Music.git",
+  "author": "a851870 <851870124@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
