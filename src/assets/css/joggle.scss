@@ -1,0 +1,26 @@
+@charset "UTF-8";
+//基础设定
+@import "base/reset";
+@import "theme/animate";
+
+//主题设定
+@import "theme/theme";
+
+//home设定
+@import "views/home";
+@import "views/player";
+
+//页面头部
+@import "views/home/header";
+
+//页面滚动
+@import "views/home/roll";
+
+//页面导航
+@import "views/home/nav";
+
+//歌曲列表部分
+@import "views/home/musicList";
+
+//音乐控制台
+@import "views/home/control";

@@ -1,0 +1,132 @@
+.header{
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	position: fixed;
+	top: 0;right:0;left:0;
+	height: 1.25rem;
+	z-index:1;
+	background-color: $color-background;
+	.icon {
+		width: 0.8rem;
+		padding :0 0.2875rem;
+		vertical-align: -0.025rem;
+		fill: $color-font-icon;
+		overflow: hidden;
+	}
+	//
+	$shade-width : 2.8rem;
+	.meun{
+		position:fixed;
+		width:$shade-width;
+		background-color:$color-background-list;
+		bottom:$control-height;top:0;
+		z-index:2;
+		.personal{
+			height:3.6rem;
+			width:$shade-width;
+			background-color:$color-background-meun;
+			.hair{
+				margin:0 .2rem .2rem .2rem;
+				width:$shade-width - 0.4rem;height:$shade-width - 0.4rem;
+				background-color:#666;
+				border-radius:100%;
+			}
+			.meData{
+				height:0.64rem;
+				text-align:center;
+				align-item:center;
+				display:flex;
+				flex-direction:row;
+				.levelIcon{
+					height: 0.64rem;
+					vertical-align: -0.06rem;
+					fill: #000;
+					overflow: hidden;
+				}
+				.nickName,.level{
+					color:$color-text-meun;
+					line-height:0.64rem;
+					flex:1;
+				}
+			}
+		}
+		.meunList{
+			margin-top:0.4rem;
+			li{
+				.listIcon{
+					float:left;
+					padding:0 .16remx;
+					display:inline-block;
+					height: 1.0rem;width:0.56rem;
+					vertical-align: -0.06rem;
+					fill: currentColor;
+					overflow: hidden;
+				}
+				span{
+					float:left;
+				}
+				height:1.0rem;line-height:1.0rem;
+			}
+		}
+	}
+	.shade{
+		position:fixed;
+		left:$shade-width;right:0;bottom:$control-height;top:0;
+		z-index:2;
+		background-color:rgba(0,0,0,0.3);
+	}
+	.search{
+		position:fixed;
+		top:0;bottom:$control-height;right:0;left:0;
+		background-color:#fff;
+		.main{
+			height:1.44rem;
+			display:flex;flex-direction:row;
+			background-color:$color-theme;
+			 box-shadow:0px 0.025rem 0.075rem #333333;
+			.out{
+				width:3.8em;
+			}
+			.input{
+				margin:0.2rem;
+				margin-right:0.4rem;
+				flex-grow: 1;
+				.case{
+					width:100%;height:100%;
+					position:relative;
+					.inSearch{
+						box-sizing:border-box;
+						width:100%;height:100%;
+						border:0;border-bottom:0.025rem solid #000;
+					}
+
+				}
+
+			}
+		}
+		.hotSea{
+			height:5.6rem;
+			background-color:#888;
+			.text{
+				height:0.8rem;
+				padding:0.32rem;
+				line-height:0.8rem;
+			}
+			.hotList{
+				padding:0 1.4rem 0 0.48rem;
+				display:flex;
+				flex-wrap:wrap;
+				li{
+					height:0.4rem;
+					padding:0.32rem;
+					margin:0.2rem 0.2rem 0 0;
+					border:0.025rem solid #fff;
+					border-radius:0.4rem;
+				}
+			}
+		}
+	}
+}
+
+

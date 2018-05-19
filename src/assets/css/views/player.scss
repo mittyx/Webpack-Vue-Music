@@ -1,0 +1,93 @@
+#app{
+    position:relative;
+    height: 100vh;
+    .playSong	{
+        position:absolute;
+        right:0;top:0;bottom:0;left:0;
+        z-index: 2;
+        display: flex;flex-direction: column;
+        overflow: hidden;
+        .playSong-box{ 
+            height: 100%; 
+            width: 100%;
+            position: relative;display: flex;flex-direction: column;
+            background-color: rgba($color: #ffffff, $alpha: 1.0);
+            .playSong-img{  
+                position: absolute;top:0;bottom: 0;left: 0;right: 0;
+                filter: blur(1.8px);
+                z-index: 2;
+            }
+        }
+        .play-header{
+            height: 3.5rem;
+            display: flex;
+            z-index: 3;
+            .play-back,.play-info,.play-share{height: 100%;box-sizing: border-box;z-index: 3;}
+            .play-back{width: 1.4rem;padding: 0 0.3rem;}
+            .play-info{flex-grow:1;}
+            .play-share{width: 1.4rem;padding: 0 0.3rem;}
+        }
+        .play-lrc{
+            z-index: 3;
+            flex-grow: 1;
+            overflow:auto;
+            ul{
+                transition: all .5s;
+                padding: 6rem 0;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                li{
+                    height: .8rem;
+                    line-height: .8rem;
+                    text-align: center;
+                    width: 100%;
+                }
+                .active{
+                    color: coral
+                }
+            }
+        }
+        .play-footer{
+            z-index: 3;
+            height: 3.5rem;
+            width: 100%;
+            $Time-height : 0.5rem;
+            .module-Time{
+                display: flex;
+                .playTime,.maxTime{
+                    font-size: 12px;
+                    line-height:$Time-height;
+                    padding: 0 0.1rem; 
+                }
+                .progress-box{
+                    flex-grow: 1;
+                    position: relative;
+                    .yuanxk{
+                        height: $Time-height;
+                        width: $Time-height;
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                    }
+                    progress{
+                        width:100%;
+                        height: $Time-height;
+                        padding: 0.2rem 0.25rem;
+                        border-radius: .1rem;
+                        box-sizing: border-box;
+                        
+                    }
+                    progress::-webkit-progress-bar {
+                        background-color: #fff;
+                    }
+                      
+                    progress::-webkit-progress-value {
+                        background-color: #cecece;
+                    }
+                }
+            }
+            
+        }
+    }
+}

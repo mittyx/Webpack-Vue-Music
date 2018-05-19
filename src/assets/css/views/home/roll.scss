@@ -1,0 +1,13 @@
+.roll{
+  height: $swipe-height;
+  width: 100vw;
+  margin-top: 1.25rem;
+  background-color: red;
+  .vant{
+  	height:$swipe-height;
+  }
+  img{
+    height: $swipe-height;
+    width: 100vw;
+  }
+}

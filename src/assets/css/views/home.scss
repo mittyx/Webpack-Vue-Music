@@ -1,0 +1,10 @@
+.home{
+	display:flex;
+	height:100vh;
+	flex-direction:column;
+	.test{
+		flex-grow:1;
+        padding-bottom: $control-height;
+        background-color:#F5F5F5;
+	}
+}

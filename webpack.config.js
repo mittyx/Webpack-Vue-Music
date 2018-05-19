@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     mode: 'development',
@@ -10,10 +11,10 @@ module.exports = {
 
     entry: {
         polyfills: './deploy/polyfills.js',
-        index: './src/index.js'
+        main: './src/main.js'
     },
     devServer: {
-        contentBase: '.dist',
+        contentBase: './dist',
         hot: true
     },
     module: {
@@ -43,25 +44,31 @@ module.exports = {
                     "css-loader",
                     "sass-loader"
                 ]
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
             }
         ]      
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            title: 'Hot Module Replacement'
+            title: 'Custom template',
+            template: 'index.html'
         }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
             filename: "[name].css",
             chunkFilename: "[id].css"
-        })
+        }),
+        new VueLoaderPlugin()
     ],
 
     //output为输出 path代表路径 filename代表文件名称
     output: {
-        filename: '[name].bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     }
 }
