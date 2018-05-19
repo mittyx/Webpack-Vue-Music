@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     mode: 'development',
@@ -34,6 +35,14 @@ module.exports = {
             {
                 test: /\.(png|jpg|gif)$/, 
                 use: [{ loader: 'url-loader',options: { limit: 8192 } }] 
+            },
+            {
+                test: /\.s?[ac]ss$/,
+                use: [
+                    process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    "css-loader",
+                    "sass-loader"
+                ]
             }
         ]      
     },
@@ -43,7 +52,11 @@ module.exports = {
             title: 'Hot Module Replacement'
         }),
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        })
     ],
 
     //output为输出 path代表路径 filename代表文件名称
