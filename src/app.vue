@@ -1,15 +1,22 @@
 <template>
-    <section class="main">
-        <p>我来了1{{name}}</p>
-    </section>
+  <div id="app">
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+  </div>
 </template>
 
 <script>
-export default {
-    data () {
-        return {
-            name:"vue + webpack"
-        }
-    }
-}
+  export default {
+      name: 'app',
+      data () {
+          return {}
+      },
+      components:{
+      },
+      mounted(){
+
+      }
+
+  }
 </script>

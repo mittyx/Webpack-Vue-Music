@@ -1,11 +1,10 @@
 <template>
-    <div class="home" :style="{overflowY:homeScroll}">
-        hi
+    <div class="home">
+        hello vue webpack4
     </div>
 </template>
 
 <script>
-
     export default {
         name:'Home',
         components: {
@@ -22,3 +21,9 @@
         }
     }
 </script>
+
+<style lang="sass" scoped>
+    .home{
+        color: red;
+    }
+</style>

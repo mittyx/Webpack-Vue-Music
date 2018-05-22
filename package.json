@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "parcel go to webpack4",
   "scripts": {
-    "dev": "webpack-dev-server --open",
+    "dev": "webpack-dev-server --mode development",
     "build": "npx webpack --config webpack.config.js"
   },
   "main": "index.js",

@@ -15,7 +15,10 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist',
-        hot: true
+        host:'localhost',
+        port:8090,
+        hot: true,
+        open:true
     },
     module: {
         rules: [
@@ -24,9 +27,7 @@ module.exports = {
                 exclude: /(node_modules|bower_components)/,  
                 use: {  
                     loader: 'babel-loader',  
-                    options:{  
-                        cacheDirectory:true, //缓存  
-                    }  
+                    options:{ cacheDirectory:true }     //缓存
                 }  
             },
             {
@@ -54,6 +55,10 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
+            minify:{
+                collapseWhitespace:true //折叠空白区域 也就是压缩代码
+            },
+            hash:true,
             title: 'Custom template',
             template: 'index.html'
         }),

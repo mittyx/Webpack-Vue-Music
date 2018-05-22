@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../views/Home'
+import Home from '../views/home.vue'
 
 Vue.use(Router);
 
@@ -9,11 +9,9 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'Home',
+			name: 'home',
 			component: Home,
-			meta: {
-				keepAlive: true // 需要被缓存
-			  }
+			meta: { keepAlive: true }  // 需要被缓存
 		}
 	]
 })
