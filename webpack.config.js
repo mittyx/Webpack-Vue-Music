@@ -7,10 +7,10 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     mode: 'development',
-    devtool: 'inline-source-map',
-
+    devtool: 'inline-source-map',   
     entry: {
         polyfills: './deploy/polyfills.js',
+        amfeFlexible: './public/amfeFlexible/index.min.js',
         main: './src/main.js'
     },
     devServer: {
@@ -51,6 +51,13 @@ module.exports = {
                 use: 'vue-loader'
             }
         ]      
+    },
+    resolve: {
+        mainFiles: ["index"],
+        extensions: [".js", ".vue"],
+        alias: {
+            Utilities: path.resolve(__dirname, 'src/assets/')
+        }
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),

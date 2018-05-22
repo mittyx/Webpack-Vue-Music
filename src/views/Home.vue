@@ -1,29 +1,29 @@
 <template>
-    <div class="home">
-        hello vue webpack4
+    <div class="home" :style="{overflowY:homeScroll}">
+        <v-header></v-header>
     </div>
 </template>
 
 <script>
+    import Header from './header/header';
+
     export default {
-        name:'Home',
+        name: 'Home',
         components: {
+            'v-header' : Header
         },
         data(){
             return{
+                homeScroll:'visible',
             }
         },
-        computed:{
+        computed: {
+            getState(){ return this.$store.state.homeScroll }
         },
-        watch:{
+        watch: {
+            getState(val){ this.homeScroll = val }
         },
-        mounted(){
+        mounted () {
         }
     }
 </script>
-
-<style lang="sass" scoped>
-    .home{
-        color: red;
-    }
-</style>

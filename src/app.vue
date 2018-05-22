@@ -11,12 +11,6 @@
       name: 'app',
       data () {
           return {}
-      },
-      components:{
-      },
-      mounted(){
-
       }
-
   }
 </script>

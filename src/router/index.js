@@ -9,9 +9,16 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			name: 'home',
+			name: 'Home',
 			component: Home,
-			meta: { keepAlive: true }  // 需要被缓存
+			meta: {
+				keepAlive: true // 需要被缓存
+			  }
+		},
+        {
+            path: '/search',
+            name: 'Seacrh',
+            component: Home
 		}
 	]
 })
