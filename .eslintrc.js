@@ -4,7 +4,7 @@ module.exports = {
     "parserOptions": {
         "sourceType": "module"
     },
-    "plugins": ["html"],
+    "plugins": ['html','standard','promise'],
     "env": {
         "browser": true,
         "node": true,
@@ -14,7 +14,7 @@ module.exports = {
         "html/html-extensions": [".html", ".vue"],
         "html/indent": "+2"
     },
-    "extends": "eslint:recommended",
+    "extends": "standard",
     "rules": {
         "indent": [
             "error",

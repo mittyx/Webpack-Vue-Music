@@ -11,9 +11,9 @@
 </template>
 
 <script>
-    export default {
-        name: "groom"
-    }
+export default {
+      name: 'groom'
+  }
 </script>
 
 <style lang="scss" scoped>

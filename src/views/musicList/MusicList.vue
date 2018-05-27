@@ -9,23 +9,23 @@
 </template>
 
 <script>
-    import liList from "./listTouch"
-    import MySong from "./list/Song"
-    import Groom from "./list/Groom"
-    import SongSheel from "./list/SongSheel"
-    export default {
-        components:{
-            'v-list' : liList,
-            'my-song' : MySong,
-            'song-sheel' : SongSheel,
-            'Groom' : Groom
-        },
-        data(){
-            return{
+import liList from './listTouch'
+  import MySong from './list/Song'
+  import Groom from './list/Groom'
+  import SongSheel from './list/SongSheel'
+  export default {
+      components: {
+          'v-list': liList,
+          'my-song': MySong,
+          'song-sheel': SongSheel,
+          'Groom': Groom
+      },
+      data () {
+          return {
 
-            }
-        }
+          }
+      }
 
-    }
+  }
 </script>
 

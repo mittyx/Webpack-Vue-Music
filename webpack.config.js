@@ -7,7 +7,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     mode: 'development',
-    devtool: 'inline-source-map',   
+    devtool: 'inline-source-map',
     entry: {
         polyfills: './deploy/polyfills.js',
         amfeFlexible: './public/amfeFlexible/index.min.js',
@@ -15,28 +15,28 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist',
-        host:'localhost',
-        port:8090,
+        host: 'localhost',
+        port: 8090,
         hot: true,
-        open:true
+        open: true
     },
     module: {
         rules: [
-            {  
-                test: /\.js$/,  
-                exclude: /(node_modules|bower_components)/,  
-                use: {  
-                    loader: 'babel-loader',  
-                    options:{ cacheDirectory:true }     //缓存
-                }  
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: { cacheDirectory: true }
+                }
             },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|jpg|gif)$/, 
-                use: [{ loader: 'url-loader',options: { limit: 8192 } }] 
+                test: /\.(png|jpg|gif)$/,
+                use: [ { loader: 'url-loader', options: { limit: 8192 } } ]
             },
             {
                 test: /\.s?[ac]ss$/,
@@ -50,7 +50,7 @@ module.exports = {
                 test: /\.vue$/,
                 use: 'vue-loader'
             }
-        ]      
+        ]
     },
     resolve: {
         mainFiles: ['index'],
@@ -62,10 +62,10 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-            minify:{
-                collapseWhitespace:true //折叠空白区域 也就是压缩代码
+            minify: {
+                collapseWhitespace: true // 折叠空白区域 也就是压缩代码
             },
-            hash:true,
+            hash: true,
             title: 'Custom template',
             template: 'index.html'
         }),
@@ -78,7 +78,7 @@ module.exports = {
         new VueLoaderPlugin()
     ],
 
-    //output为输出 path代表路径 filename代表文件名称
+    // output为输出 path代表路径 filename代表文件名称
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
