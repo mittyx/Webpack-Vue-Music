@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
@@ -42,8 +42,8 @@ module.exports = {
                 test: /\.s?[ac]ss$/,
                 use: [
                     process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader"
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
             {
@@ -53,8 +53,8 @@ module.exports = {
         ]      
     },
     resolve: {
-        mainFiles: ["index"],
-        extensions: [".js", ".vue"],
+        mainFiles: ['index'],
+        extensions: ['.js', '.vue'],
         alias: {
             Utilities: path.resolve(__dirname, 'src/assets/')
         }
@@ -72,8 +72,8 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
-            chunkFilename: "[id].css"
+            filename: '[name].css',
+            chunkFilename: '[id].css'
         }),
         new VueLoaderPlugin()
     ],

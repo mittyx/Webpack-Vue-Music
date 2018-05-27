@@ -1,24 +1,20 @@
 module.exports = {
     "root": true,
     "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "plugins": ["html"],
     "env": {
         "browser": true,
+        "node": true,
         "es6": true
     },
     "settings": {
         "html/html-extensions": [".html", ".vue"],
-        "html/indent": "+2",
-        "import/resolver": {
-            "webpack": {
-                "config": "./webpack.conf.js"
-            }
-        }
+        "html/indent": "+2"
     },
     "extends": "eslint:recommended",
-    "parserOptions": {
-        "sourceType": "module"
-    },
     "rules": {
         "indent": [
             "error",

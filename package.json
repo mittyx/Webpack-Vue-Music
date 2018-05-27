@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "npx webpack --config webpack.config.js",
-    "lint": "eslint --ext .js,.html,.vue src"
+    "lint": "eslint --fix --ext .js,.html,.vue src"
   },
   "main": "index.js",
   "repository": "git@github.com:a851870/Webpack-Vue-Music.git",
