@@ -5,18 +5,18 @@
 </template>
 
 <script>
-    export default {
-        data(){
-            return{
+export default {
+      data () {
+          return {
 
-            }
-        },
-        methods:{
-            trolShow(){
-                this.$store.state.controlShow = true;
-                this.$store.state.homeScroll = 'hidden';
-                this.$router.push({name: 'player', params: { songId:'yzhaj' }})
-            }
-        }
-    }
+          }
+      },
+      methods: {
+          trolShow () {
+              this.$store.state.controlShow = true
+              this.$store.state.homeScroll = 'hidden'
+              this.$router.push({name: 'player', params: { songId: 'yzhaj' }})
+          }
+      }
+  }
 </script>

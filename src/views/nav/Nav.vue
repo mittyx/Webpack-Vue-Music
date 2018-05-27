@@ -9,29 +9,29 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    export default {
-        data(){
-            return{
-                active:0,
-				title:['我的','推荐','歌单','排行']
-            }
-        },
-		computed:{
-            getStateNum(){
-                return this.$store.state.navNum;
-			}
-		},
-		watch:{
-            getStateNum(val){
-                this.active = val;
-			}
-		},
-        methods:{
-        	handleTabClick(index){
-                this.$store.state.navNum = index;
-                this.$store.state.navNum == 2 ? this.$store.state.sheelShow = true : this.$store.state.sheelShow = false;   
-        	}
-        }
-    }
+import axios from 'axios'
+  export default {
+      data () {
+          return {
+              active: 0,
+              title: ['我的', '推荐', '歌单', '排行']
+          }
+      },
+      computed: {
+          getStateNum () {
+              return this.$store.state.navNum
+          }
+      },
+      watch: {
+          getStateNum (val) {
+              this.active = val
+          }
+      },
+      methods: {
+        	handleTabClick (index) {
+              this.$store.state.navNum = index
+              this.$store.state.navNum == 2 ? this.$store.state.sheelShow = true : this.$store.state.sheelShow = false
+      	}
+      }
+  }
 </script>

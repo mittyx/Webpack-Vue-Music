@@ -20,16 +20,16 @@
 </template>
 
 <script>
-    export default {
-        name: "mysong",
-        data(){
-            return{
-                setShow:true,
-                houseShow:true,
-                activeName: '2'
-            }
-        },
-        methods:{
-        }
-    }
+export default {
+      name: 'mysong',
+      data () {
+          return {
+              setShow: true,
+              houseShow: true,
+              activeName: '2'
+          }
+      },
+      methods: {
+      }
+  }
 </script>

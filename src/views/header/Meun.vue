@@ -43,32 +43,32 @@
 </template>
 
 <script>
-    export default {
-        props:{
-            value:{
-                type:Boolean,
-                default:false
-            }
-        },
-        data(){
-            return{
-                visible:false
-            }
-        },
-        watch:{
-            value(val){
-                this.visible = val;
-            },
-            visible(val){
-                this.$emit('input', val);
-            }
-        },
-        mounted(){
-            if(this.value){
-                this.visible = true;
-            }
-        }
-    }
+export default {
+      props: {
+          value: {
+              type: Boolean,
+              default: false
+          }
+      },
+      data () {
+          return {
+              visible: false
+          }
+      },
+      watch: {
+          value (val) {
+              this.visible = val
+          },
+          visible (val) {
+              this.$emit('input', val)
+          }
+      },
+      mounted () {
+          if (this.value) {
+              this.visible = true
+          }
+      }
+  }
 </script>
 
 <style scoped>
