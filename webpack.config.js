@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
@@ -9,8 +10,8 @@ module.exports = {
     mode: 'development',
     devtool: 'inline-source-map',
     entry: {
-        polyfills: './deploy/polyfills.js',
-        amfeFlexible: './public/amfeFlexible/index.min.js',
+        './public/polyfills': './public/polyfills.js',
+        './public/amfeFlexible': './public/amfeFlexible/index.min.js',
         main: './src/main.js'
     },
     devServer: {
@@ -75,7 +76,13 @@ module.exports = {
             filename: '[name].css',
             chunkFilename: '[id].css'
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CopyWebpackPlugin([ // 支持输入一个数组
+            {
+                from: path.resolve(__dirname, 'public/iconfont'), // 将src/assets下的文件
+                to: './public/iconfont' // 复制到public
+            }
+        ])
     ],
 
     // output为输出 path代表路径 filename代表文件名称
