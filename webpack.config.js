@@ -17,7 +17,7 @@ module.exports = {
         contentBase: './dist',
         host: 'localhost',
         port: 8090,
-        hot: false,
+        hot: true,
         open: true,
         overlay: { // 当有编译错误或者警告的时候显示一个全屏overlay
             errors: true,
