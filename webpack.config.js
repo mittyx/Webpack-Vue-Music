@@ -19,7 +19,17 @@ module.exports = {
         host: 'localhost',
         port: 8090,
         hot: true,
-        open: true
+        open: true,
+        overlay: { // 当有编译错误或者警告的时候显示一个全屏overlay
+            errors: true,
+            warnings: false
+        },
+        clientLogLevel: 'warning',
+        noInfo: true,
+        quiet: true,
+        watchOptions: {
+            poll: false
+        }
     },
     module: {
         rules: [
@@ -77,6 +87,8 @@ module.exports = {
             chunkFilename: '[id].css'
         }),
         new VueLoaderPlugin(),
+
+        // 复制项目
         new CopyWebpackPlugin([ // 支持输入一个数组
             {
                 from: path.resolve(__dirname, 'public/iconfont'), // 将src/assets下的文件

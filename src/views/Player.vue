@@ -69,7 +69,7 @@ export default {
               vm.controlShow = true
           })
       },
-  
+
       methods: {
           play () {
               if (this.audio.paused) {
@@ -129,7 +129,7 @@ export default {
       mounted () {
           this.audio = new Audio(this.musicSrc)
           // this.audio.load();
-  
+
           let _this = this
           this.audio.addEventListener('timeupdate', function (e) {
               _this.currentTime = parseInt(this.currentTime)
@@ -137,7 +137,7 @@ export default {
           })
           // this.progressWidth = document.getElementById('progress');
           // console.log(this.progressWidth.offsetWidth )
-  
+
           // 获取歌词
           myAjax(require('@/lrc/yzhaj.lrc'), true).then(
               lrc => { return lrcRegular(lrc) } // 获取对象歌词链式调用

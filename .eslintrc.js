@@ -1,36 +1,38 @@
 module.exports = {
-    "root": true,
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "sourceType": "module"
+    'root': true,
+    'parserOptions': {
+        'parser': 'babel-eslint',
+        'sourceType': 'module'
     },
-    "plugins": ['html','standard','promise'],
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
+    'plugins': ['html', 'standard', 'promise', 'vue'],
+    'env': {
+        'browser': true,
+        'node': true,
+        'es6': true
     },
-    "settings": {
-        "html/html-extensions": [".html", ".vue"],
-        "html/indent": "+2"
-    },
-    "extends": "standard",
-    "rules": {
-        "indent": [
-            "error",
+    'extends': [
+        'plugin:vue/essential',
+        'standard'
+    ],
+    'rules': {
+        'generator-star-spacing': 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+        'indent': [
+            'error',
             4
         ],
-        "linebreak-style": [
-            "error",
-            "windows"
+        'linebreak-style': [
+            'error',
+            'windows'
         ],
-        "quotes": [
-            "error",
-            "single"
+        'quotes': [
+            'error',
+            'single'
         ],
-        "semi": [
-            "error",
-            "never"
-        ]
+        'semi': [
+            'error',
+            'never'
+        ],
+        'no-new' :0
     }
 };

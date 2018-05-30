@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        wos1
+        wos12
     </header>
 </template>
 <script>

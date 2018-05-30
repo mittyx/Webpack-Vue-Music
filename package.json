@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "parcel go to webpack4",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server  --inline --config webpack.config.js",
     "build": "npx webpack --config webpack.config.js",
     "lint": "eslint --fix --ext .js,.html,.vue src"
   },
@@ -23,11 +23,13 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
+    "eslint-loader": "^2.0.0",
     "eslint-plugin-html": "^4.0.3",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^4.5.0",
     "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.0",
