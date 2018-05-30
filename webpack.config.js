@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
-    mode: 'development',
     devtool: 'inline-source-map',
     entry: {
         './public/polyfills': './public/polyfills.js',
@@ -18,7 +17,7 @@ module.exports = {
         contentBase: './dist',
         host: 'localhost',
         port: 8090,
-        hot: true,
+        hot: false,
         open: true,
         overlay: { // 当有编译错误或者警告的时候显示一个全屏overlay
             errors: true,
@@ -67,7 +66,7 @@ module.exports = {
         mainFiles: ['index'],
         extensions: ['.js', '.vue'],
         alias: {
-            Utilities: path.resolve(__dirname, 'src/assets/')
+            '~': path.resolve(__dirname, 'src/assets/')
         }
     },
     plugins: [
