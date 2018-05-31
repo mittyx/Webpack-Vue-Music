@@ -1,9 +1,11 @@
 const path = require('path')
+// 项目目录方面设置
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+// 提取css
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
@@ -12,6 +14,11 @@ module.exports = {
         './public/polyfills': './public/polyfills.js',
         './public/amfeFlexible': './public/amfeFlexible/index.min.js',
         main: './src/main.js'
+    },
+    // output为输出 path代表路径 filename代表文件名称
+    output: {
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'dist')
     },
     devServer: {
         contentBase: './dist',
@@ -50,11 +57,10 @@ module.exports = {
             },
             {
                 test: /\.s?[ac]ss$/,
-                use: [
-                    process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    'sass-loader'
-                ]
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
             },
             {
                 test: /\.vue$/,
@@ -70,6 +76,9 @@ module.exports = {
         }
     },
     plugins: [
+        // 提取css
+        new ExtractTextPlugin('style.css'),
+        // 项目目录方面设置
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
             minify: {
@@ -79,26 +88,16 @@ module.exports = {
             title: 'Custom template',
             template: 'index.html'
         }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
-        }),
-        new VueLoaderPlugin(),
-
-        // 复制项目
-        new CopyWebpackPlugin([ // 支持输入一个数组
+        new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, 'public/iconfont'), // 将src/assets下的文件
                 to: './public/iconfont' // 复制到public
             }
-        ])
-    ],
-
-    // output为输出 path代表路径 filename代表文件名称
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
-    }
+        ]),
+        // 热更新
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        // vue-loader
+        new VueLoaderPlugin()
+    ]
 }
