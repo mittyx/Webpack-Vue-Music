@@ -1,13 +1,17 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: {
         './public/polyfills': './public/polyfills.js',
-        './public/amfeFlexible': './public/amfeFlexible/index.min.js',
-        main: './src/main.js'
+        main: './src/main.js',
+        vendors: ['vue', 'vue-router', 'vuex', 'axios', 'vue-template-compiler']
+    },
+    output: {
+        filename: '[name].js',
+        // chunkFilename: 'js/[name].js',
+        path: path.resolve(__dirname, '../dist')
     },
     module: {
         rules: [
@@ -20,16 +24,19 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 1024 * 10
+                        }
+                    }
+                ]
             },
             {
-                test: /\.(png|jpg|gif)$/,
-                use: [ { loader: 'url-loader', options: { limit: 8192 } } ]
-            },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader'
+                test: /\.(png|jpg|jpeg|gif|svg)$/,
+                use: [ { loader: 'url-loader', options: { limit: 1024 * 10 } } ]
             }
         ]
     },
@@ -49,7 +56,20 @@ module.exports = {
             hash: true,
             title: 'Custom template',
             template: 'index.html'
-        }),
-        new VueLoaderPlugin()
-    ]
+        })
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all',
+            cacheGroups: {
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: 'initial',
+                    name: 'vendors',
+                    priority: -10
+                }
+            }
+        },
+        runtimeChunk: 'single'
+    }
 }

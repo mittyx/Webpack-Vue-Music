@@ -1,46 +1,47 @@
 const path = require('path')
 const merge = require('webpack-merge')
-const base = require('./webpack.base.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpackBaseConfig = require('./webpack.base.js')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-module.exports = merge(base, {
+module.exports = merge(webpackBaseConfig, {
     mode: 'production',
+    devtool: false,
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: { cacheDirectory: true }
-                }
+                test: /\.scss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: [ { loader: 'url-loader', options: { limit: 8192 } } ]
+                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader']
             },
             {
                 test: /\.vue$/,
                 use: 'vue-loader'
-            },
-            {
-                test: /\.s?[ac]ss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
-                })
             }
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css')
-    ],
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, '../dist')
-    }
+        new VueLoaderPlugin(),
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, '../public/iconfont'), // 将src/assets下的文件
+                to: './public/iconfont' // 复制到public
+            },
+            {
+                from: path.resolve(__dirname, '../public/amfeFlexible'),
+                to: './public/amfeFlexible'
+            }
+        ])
+    ]
 })
