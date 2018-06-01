@@ -3,6 +3,7 @@ import App from './app.vue'
 import router from './router'
 
 import Vuex from 'vuex'
+import '~/css/joggle.scss'
 
 Vue.config.productionTip = false
 Vue.use(Vuex)

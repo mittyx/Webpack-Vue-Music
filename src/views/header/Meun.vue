@@ -1,8 +1,9 @@
 <template>
-    <transition name="custom-classes-transition"
-                enter-active-class="animated tada"
-                leave-active-class="animated bounceOutRight">
-        <div class="meun" :value="value" v-show="visible">
+    <transition 
+    name="slides"
+    enter-active-class="animated slideInLeft"
+    leave-active-class="animated slideOutLeft">
+        <div class="meun" :value="value" v-show="meunShow">
             <div class="personal">
                 <img src="../../assets/images/head.png" class="hair">
                 <div class="meData">
@@ -44,33 +45,35 @@
 
 <script>
 export default {
-      props: {
-          value: {
-              type: Boolean,
-              default: false
-          }
-      },
-      data () {
-          return {
-              visible: false
-          }
-      },
-      watch: {
-          value (val) {
-              this.visible = val
-          },
-          visible (val) {
-              this.$emit('input', val)
-          }
-      },
-      mounted () {
-          if (this.value) {
-              this.visible = true
-          }
-      }
-  }
+    props: {
+        value: {
+            type: Boolean,
+            default: false
+        }
+    },
+    data () {
+        return {
+            meunShow: false
+        }
+    },
+    watch: {
+        value (val) {
+            this.meunShow = val
+        },
+        meunShow (val) {
+            this.$emit('input', val)
+        }
+    },
+    mounted () {
+        if (this.value) {
+            this.meunShow = true
+        }
+    }
+}
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.slideInLeft{
+    animation: slideInLeft 5s;
+}
 </style>
