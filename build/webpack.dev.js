@@ -1,8 +1,9 @@
 const merge = require('webpack-merge')
-const base = require('./webpack.base.js')
+const webpackBaseConfig = require('./webpack.base.js')
 const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-module.exports = merge(base, {
+module.exports = merge(webpackBaseConfig, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
@@ -25,24 +26,12 @@ module.exports = merge(base, {
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: { cacheDirectory: true }
-                }
+                test: /\.vue$/,
+                use: 'vue-loader'
             },
             {
                 test: /\.css$/,
                 use: ['style-loader', 'css-loader']
-            },
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: [ { loader: 'url-loader', options: { limit: 8192 } } ]
-            },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader'
             },
             {
                 test: /\.s?[ac]ss$/,
@@ -56,6 +45,7 @@ module.exports = merge(base, {
     },
     plugins: [
         new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new VueLoaderPlugin()
     ]
 })

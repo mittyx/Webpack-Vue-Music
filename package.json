@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "parcel go to webpack4",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --inline --config webpack.config.js",
-    "build": "npx webpack --mode production --config webpack.config.js",
+    "dev": "webpack-dev-server --mode development --inline --config build/webpack.dev.js",
+    "build": "npx webpack --mode production --config build/webpack.prod.js",
     "lint": "eslint --fix --ext .js,.html,.vue src"
   },
   "main": "index.js",
