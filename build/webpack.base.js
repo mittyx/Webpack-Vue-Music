@@ -5,12 +5,10 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
     entry: {
         './public/polyfills': './public/polyfills.js',
-        main: './src/main.js',
-        vendors: ['vue', 'vue-router', 'vuex', 'axios', 'vue-template-compiler']
+        main: './src/main.js'
     },
     output: {
         filename: '[name].js',
-        // chunkFilename: 'js/[name].js',
         path: path.resolve(__dirname, '../dist')
     },
     module: {
@@ -48,7 +46,7 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(['dist'], {root: '../'}),
+        new CleanWebpackPlugin([path.resolve(__dirname, '../dist')]),
         new HtmlWebpackPlugin({
             minify: {
                 collapseWhitespace: true // 折叠空白区域 也就是压缩代码
@@ -66,7 +64,16 @@ module.exports = {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'initial',
                     name: 'vendors',
-                    priority: -10
+                    minChunks: 1
+                },
+                common: {// ‘src/js’ 下的js文件
+                    chunks: 'all',
+                    test: /[\\/]src[\\/]js[\\/]/, // 也可以值文件/[\\/]src[\\/]js[\\/].*\.js/
+                    name: 'common', // 生成文件名，依据output规则
+                    minChunks: 2,
+                    maxInitialRequests: 5,
+                    minSize: 0,
+                    priority: 1
                 }
             }
         },
