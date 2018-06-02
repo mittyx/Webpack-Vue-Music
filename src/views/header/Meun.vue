@@ -8,34 +8,24 @@
                 <img src="../../assets/images/head.png" class="hair">
                 <div class="meData">
                     <div class="nickName">灬夏影</div>
-                    <svg class="levelIcon level" aria-hidden="true">
-                        <use xlink:href="#icon-ic_userlevel_"></use>
-                    </svg>
+                    <i class="icon iconfont icon-ic_userlevel_ levelIcon"></i>
                 </div>
             </div>
             <ul class="meunList">
                 <li>
-                    <svg class="listIcon" aria-hidden="true">
-                        <use xlink:href="#icon-wodexiaoxi"></use>
-                    </svg>
+                    <i class="icon iconfont icon-wodexiaoxi listIcon"></i>
                     <span>我的消息</span>
                 </li>
                 <li>
-                    <svg class="listIcon" aria-hidden="true">
-                        <use xlink:href="#icon-icon--"></use>
-                    </svg>
+                    <i class="icon iconfont icon-icon-- listIcon"></i>
                     <span>好友列表</span>
                 </li>
                 <li>
-                    <svg class="listIcon" aria-hidden="true">
-                        <use xlink:href="#icon-pifuzhuti-xianxing"></use>
-                    </svg>
+                    <i class="icon iconfont icon-pifuzhuti-xianxing listIcon"></i>
                     <span>个性皮肤</span>
                 </li>
                 <li>
-                    <svg class="listIcon" aria-hidden="true">
-                        <use xlink:href="#icon-yejian"></use>
-                    </svg>
+                    <i class="icon iconfont icon-yejian listIcon"></i>
                     <span>夜间模式</span>
                 </li>
             </ul>
@@ -71,9 +61,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-.slideInLeft{
-    animation: slideInLeft 5s;
-}
-</style>

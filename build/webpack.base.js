@@ -42,7 +42,9 @@ module.exports = {
         mainFiles: ['index'],
         extensions: ['.js', '.vue'],
         alias: {
-            '~': path.resolve(__dirname, '../src/assets/')
+            '~': path.resolve(__dirname, '../src/assets/'),
+            root: path.resolve(__dirname, '../'),
+            images: path.resolve(__dirname, '../src/assets/images')
         }
     },
     plugins: [

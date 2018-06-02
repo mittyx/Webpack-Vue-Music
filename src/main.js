@@ -3,9 +3,13 @@ import App from './app.vue'
 import router from './router'
 
 import Vuex from 'vuex'
+
+import axios from 'axios'
 import '~/css/joggle.scss'
 
 Vue.config.productionTip = false
+
+Vue.prototype.$ajax = axios
 Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {

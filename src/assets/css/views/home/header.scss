@@ -1,6 +1,18 @@
 header{
 	overflow: hidden;
 	height: 1.25rem;
+	.slideInLeft{
+		animation: slideInLeft 1s;
+	}
+	.slideOutLeft{
+		animation: slideOutLeft 1s;
+	}
+	.fade-enter-active, .fade-leave-active {
+		transition: opacity 1s;
+	}
+	.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+		opacity: 0;
+	}
 }
 .head{
 	display: flex;
@@ -20,53 +32,59 @@ header{
 	}
 }
 
-$meun-list-width : 6rem;
 .meun{
 	position:fixed;
 	width:$meun-list-width;
 	background-color:$color-background-list;
-	bottom:$control-height;top:0;
-	z-index:2;
+	bottom:0;top:0;
+	z-index:3;
+	display: flex;
+	flex-direction: column;
 	.personal{
-		height:3.6rem;
+		height:4rem;
+		padding-top: .4rem;
+		box-sizing: border-box;
 		width:$meun-list-width;
 		background-color:$color-background-meun;
 		.hair{
 			margin:0 .2rem .2rem .2rem;
-			width:$meun-list-width - 0.4rem;height:$meun-list-width - 0.4rem;
+			width:2.5rem;height:2.5rem;
 			background-color:#666;
 			border-radius:100%;
 		}
 		.meData{
 			height:0.64rem;
 			text-align:center;
-			align-item:center;
 			display:flex;
 			flex-direction:row;
+			color: #fff;
 			.levelIcon{
 				height: 0.64rem;
 				vertical-align: -0.06rem;
 				fill: #000;
 				overflow: hidden;
+				line-height:0.6rem;
+				font-size: .7rem
 			}
-			.nickName,.level{
-				color:$color-text-meun;
-				line-height:0.64rem;
-				flex:1;
+			.nickName{
+				padding-left: .4rem;
+				line-height: 0.64rem;
 			}
 		}
 	}
 	.meunList{
-		margin-top:0.4rem;
+		padding-top:0.4rem;
+		background-color: #fb7299;
+		flex-grow:1;
 		li{
 			.listIcon{
-				float:left;
-				padding:0 .16remx;
-				display:inline-block;
+				float: left;
+				padding: 0 .16rem;
 				height: 1.0rem;width:0.56rem;
 				vertical-align: -0.06rem;
 				fill: currentColor;
 				overflow: hidden;
+				font-size: .56rem;
 			}
 			span{
 				float:left;
@@ -77,9 +95,10 @@ $meun-list-width : 6rem;
 }
 .shade{
 	position:fixed;
-	left:$meun-list-width;right:0;bottom:$control-height;top:0;
+	left:0;right:0;bottom:0;top:0;
 	z-index:2;
-	background-color:rgba(0,0,0,0.3);
+	background-color:rgba(0,0,0,0.5);
+	transition: background-color 1s;
 }
 .search{
 	position:fixed;

@@ -12,6 +12,7 @@
   "author": "a851870 <851870124@qq.com>",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^8.5.2",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -36,6 +37,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "mockjs": "^1.0.1-beta3",
     "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
