@@ -1,6 +1,14 @@
 {
 	"presets": [
-        "env"
+	"env"
 	],
-	"plugins": ["transform-runtime"]
+	"plugins": [
+		"transform-runtime",
+		["import", {
+			"libraryName": "vant",
+			"libraryDirectory": "es",
+			"style": true
+		}]
+	]
+	
 }

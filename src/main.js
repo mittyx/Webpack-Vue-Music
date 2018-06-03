@@ -5,7 +5,10 @@ import router from './router'
 import Vuex from 'vuex'
 
 import axios from 'axios'
+
+
 import '~/css/joggle.scss'
+
 
 Vue.config.productionTip = false
 

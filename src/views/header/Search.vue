@@ -2,14 +2,12 @@
         <transition name="custom-classes-transition"
         enter-active-class="animated fadeInUp"
         leave-active-class="animated fadeOutDown" >
-	    <div class="search"  :value="value" v-show="searchShow">
-	        <div class="main">
-	        	<svg class="icon" aria-hidden="true" @click="cancel" >
-	            	<use xlink:href="#icon-47"></use>
-	        	</svg>
+	    <div class="search"  :value="value" v-if="searchShow">
+	        <div class="search-header"> 
+                <div class="out"><i class="icon iconfont icon-47" @click="cancel"></i></div>
 	        	<div class="input">
 	        		<div class="case">
-	        			<input name="search" class="inSearch" placeholder="搜索你想要的歌曲" v-model="searchVal" @keyup="seaEnter($event,searchVal)">
+	        			<input name="search" class="inSearch" placeholder="搜索你想要的歌曲" v-model="searchVal" @keyup="searchEnter($event,searchVal)">
 	        			<ul >
 	        				<li>{{searchVal}}</li>
 	        				<li v-for="item in searchSong">{{ item.songName }}</li>
@@ -36,6 +34,7 @@
 
 <script>
 import { song, hot } from 'root/mock/mock.js'
+import { LocalStorageCLass } from 'root/utils/utils.js'
 
 export default {
     props: {
@@ -46,6 +45,7 @@ export default {
     },
     data () {
         return {
+            newLocalStorageCLass: {},
             searchShow: false,
             searchVal: '',
             searchSong: [],
@@ -72,21 +72,15 @@ export default {
             this.$store.state.rollShow = true
             this.$router.push('/')
         },
-        arrUp (name, arr, le) {
-            if (arr.length >= le) {
-                !~arr.indexOf(name) ? (arr.shift(), arr[arr.length] = name)
-                : (arr.splice(arr.indexOf(name), 1), arr[arr.length] = name)
-            } else { arr[arr.length] = name }
-        },
         onSearch (song) {
-            this.$options.methods.arrUp(song, this.localData, 6)
-            this.localData = [...new Set(this.localData)]
+            this.newLocalStorageCLass.addValue(song)
+            this.localData = this.newLocalStorageCLass.getValue()
             localStorage.setItem('localData', JSON.stringify(this.localData))
         },
-        seaEnter (e, val) {
+        searchEnter (e, val) {
             if (e.keyCode == 13) {
-                this.$options.methods.arrUp(val, this.localData, 6)
-                this.localData = [...new Set(this.localData)]
+                this.newLocalStorageCLass.addValue(val)
+                this.localData = this.newLocalStorageCLass.getValue()
                 localStorage.setItem('localData', JSON.stringify(this.localData))
             }
         }
@@ -97,14 +91,10 @@ export default {
         }
         this.$ajax.get('http://hot.cn')
             .then((res) => { this.hotSearch = res.data.result })
-            .catch((error) => { console.log(error) })
-        let localArr = localStorage.getItem('localData')
-        if (localArr === null) {
-            localStorage.setItem('localData', '[]')
-            localArr = localStorage.getItem('localData')
-        }
-        JSON.parse(localArr).length > 6 && JSON.parse(localArr).splice(5, JSON.parse(localArr).length - 5)
-        this.localData = JSON.parse(localArr)
+            .catch((error) => { console.log(error) }
+        )
+        this.newLocalStorageCLass = new LocalStorageCLass()
+        this.localData = this.newLocalStorageCLass.getValue()
     }
 }
 </script>
