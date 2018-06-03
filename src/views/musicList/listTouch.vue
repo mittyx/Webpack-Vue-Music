@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import axios from 'axios'
   import liList from './listTouch'
   export default {
       data () {

@@ -1,10 +1,10 @@
 <template>
-    <div class="test">
-        <v-list>
+    <div>
+        <v-lilist>
             <my-song slot="li0"></my-song>
             <groom slot="li1"></groom>
             <song-sheel slot="li2"></song-sheel>
-        </v-list>
+        </v-lilist>
     </div>
 </template>
 
@@ -15,7 +15,7 @@ import liList from './listTouch'
   import SongSheel from './list/SongSheel'
   export default {
       components: {
-          'v-list': liList,
+          'v-lilist': liList,
           'my-song': MySong,
           'song-sheel': SongSheel,
           'Groom': Groom

@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios'
   export default {
       name: 'songSheel',
       data () {
@@ -31,14 +30,14 @@ import axios from 'axios'
                   innerHeight: document.documentElement.clientHeight || window.innerHeight
               }
               if (Math.ceil(bodyW.scrollTop) + bodyW.innerHeight == bodyW.sheelTop) {
-                  axios.post('http://sheel2.cn', {id: 1, index: this.$store.state.navNum})
+                  this.$ajax.post('http://sheel2.cn', {id: 1, index: this.$store.state.navNum})
                       .then(res => { this.sheelData = res.data.sheelData; this.status = res.data.status; this.count++ })
                       .catch(error => { console.log(error) })
               }
           }
       },
       mounted () {
-          axios.post('http://sheel2.cn', {id: 0, index: this.$store.state.navNum})
+          this.$ajax.post('http://sheel2.cn', {id: 0, index: this.$store.state.navNum})
               .then(res => { this.sheelData = res.data.sheelData })
               .catch(error => { console.log(error) })
           window.addEventListener('scroll', this.onScroll)

@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header class="header">
         <div class="head">
             <i class="icon iconfont icon-caidan head-icon" @click="goMeunShow()"></i>
             <i class="icon iconfont icon-iconfontzhizuobiaozhun22 head-icon" @click="goSeaShow()"></i>
@@ -28,7 +28,6 @@ export default {
         },
         goSeaShow () {
             this.headerSearchShow = true
-            this.$store.state.rollShow = false;
         }
     },
     components: {

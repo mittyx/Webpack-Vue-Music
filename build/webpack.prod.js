@@ -11,21 +11,21 @@ module.exports = merge(webpackBaseConfig, {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.vue$/,
+                use: 'vue-loader'
+            },
+            {
+                test: /\.s?[ac]ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader',
                     'sass-loader'
                 ]
-            },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'postcss-loader']
-            },
-            {
-                test: /\.vue$/,
-                use: 'vue-loader'
             }
+            // {
+            //     test: /\.css$/,
+            //     use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'postcss-loader']
+            // }
         ]
     },
     plugins: [

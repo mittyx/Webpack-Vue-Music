@@ -2,7 +2,7 @@
         <transition name="custom-classes-transition"
         enter-active-class="animated fadeInUp"
         leave-active-class="animated fadeOutDown" >
-	    <div class="search"  :value="value" v-if="searchShow">
+	    <div class="search"  :value="value" v-show="searchShow">
 	        <div class="search-header"> 
                 <div class="out"><i class="icon iconfont icon-47" @click="cancel"></i></div>
 	        	<div class="input">
@@ -69,7 +69,6 @@ export default {
     methods: {
         cancel () {
             this.searchShow = false
-            this.$store.state.rollShow = true
             this.$router.push('/')
         },
         onSearch (song) {
