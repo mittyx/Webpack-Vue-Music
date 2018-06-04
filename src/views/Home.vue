@@ -4,6 +4,7 @@
         <v-rolling></v-rolling>
         <v-nav></v-nav>
         <v-Musiclist></v-Musiclist>
+        <v-control></v-control>
     </div>
 </template>
 
@@ -11,7 +12,8 @@
 import Header from './header/header'
 import Rolling from './rolling'
 import Nav from './nav'
-import MusicList from './musicList/MusicList';
+import MusicList from './musicList/MusicList'
+import Control from './control'
 
   export default {
       name: 'Home',
@@ -19,7 +21,8 @@ import MusicList from './musicList/MusicList';
           'v-header': Header,
           'v-rolling': Rolling,
           'v-nav': Nav,
-          'v-Musiclist': MusicList
+          'v-Musiclist': MusicList,
+          'v-control': Control
       },
       data () {
           return {

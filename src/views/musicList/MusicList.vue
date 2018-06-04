@@ -22,7 +22,6 @@ import liList from './listTouch'
       },
       data () {
           return {
-
           }
       }
 

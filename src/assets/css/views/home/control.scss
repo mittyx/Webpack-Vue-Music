@@ -4,10 +4,44 @@
   background-color: $control-color;
   position: fixed;
   bottom: 0;
+  display: flex;
   .tsBox{
   	height:100%;
   	width:100%;
   	position:relative;
-  	
+  }
+  .cover{
+    width: $control-height;
+    background-color: red;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .info{
+    display: flex;
+    flex-direction: column-reverse;
+    color: white;
+    box-sizing: border-box;
+    padding-left: .5rem;
+    width: 5.5rem;
+    .name{
+      flex: 1;
+      line-height: $control-height / 2;
+    }
+    .singer{
+      flex: 1;
+      line-height: $control-height / 2;
+    }
+  }
+  .cont{
+    flex-grow: 1;
+    display: flex;
+    i{
+      padding: .2rem;
+      flex: 1;
+      box-sizing: border-box;
+      font-size: 1rem; 
+    }
   }
 }
