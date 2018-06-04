@@ -1,6 +1,14 @@
 .songList{
   width: 100vw;
-  
+  .wrapper{
+    overflow: hidden;
+    .viewport{
+        display: flex;
+        .item{
+            width: 100vw;
+        }
+    }
+  }
   //歌单模块
   .songSheel{
     .sheel-list{

@@ -25,10 +25,13 @@ Vue.use(VueLazyload, {
 const store = new Vuex.Store({
     state: {
         homeScroll: 'visible',
-        rollShow: true, // 滚动条显示
         navNum: 0, // 当前touch的位置
-        sheelShow: true, // 歌单显示
         controlShow: false // 播放界面
+    },
+    // 使用方法 $store.commit('sheelShow')
+    mutations: {
+        sheelShow: state => {
+        }
     }
 })
 

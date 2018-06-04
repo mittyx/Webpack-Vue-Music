@@ -29,7 +29,6 @@ export default {
     methods: {
         handleTabClick (index) {
             this.$store.state.navNum = index
-            this.$store.state.navNum == 2 ? (this.$store.state.sheelShow = true,console.log(233)) : this.$store.state.sheelShow = false
         }
     }
 }
