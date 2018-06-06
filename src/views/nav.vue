@@ -1,7 +1,7 @@
 <template>
 	<nav class="nav">
 		<van-tabs @click="handleTabClick" :active="active">
-  			<van-tab v-for="index in 4" :title="title[index-1]" >
+  			<van-tab v-for="index in 4" :title="title[index-1]" :key="index">
   			</van-tab>
 		</van-tabs>
 

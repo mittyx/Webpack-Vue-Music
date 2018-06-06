@@ -4,11 +4,11 @@ import router from './router'
 import VueLazyload from 'vue-lazyload'
 import Vuex from 'vuex'
 import axios from 'axios'
-import { Swipe, SwipeItem, Tab, Tabs, Cell, CellGroup, Collapse, CollapseItem, Progress } from 'vant'
+import { Swipe, SwipeItem, Tab, Tabs, Cell, CellGroup, Collapse, CollapseItem, Progress, Slider } from 'vant'
 import '~/css/joggle.scss'
 
 Vue.use(Vuex)
-Vue.use(Swipe).use(SwipeItem).use(Tab).use(Tabs).use(Collapse).use(CollapseItem).use(Cell).use(CellGroup).use(Progress)
+Vue.use(Swipe).use(SwipeItem).use(Tab).use(Tabs).use(Collapse).use(CollapseItem).use(Cell).use(CellGroup).use(Progress).use(Slider)
 
 Vue.config.productionTip = false
 

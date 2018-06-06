@@ -1,7 +1,7 @@
 <template>
     <div class="roll" >
 		<van-swipe :autoplay="3000"  v-show="rollShow" class="vant">
-            <van-swipe-item v-for="item in forSwipe">
+            <van-swipe-item v-for="(item,index) in forSwipe" :key="index">
                 <a v-bind:href="item.url">
                     <img v-bind:src="item.img" v-bind:title="item.title"/>
                 </a>
