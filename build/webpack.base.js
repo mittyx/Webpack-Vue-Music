@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -33,6 +34,22 @@ module.exports = {
                 ]
             },
             {
+                test: /\.mp3(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: './music/[name].[hash:7].[ext]'
+                }
+            },
+            {
+                test: /\.lrc(\?.*)?$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: './music/[name].[hash:7].[ext]'
+                }
+            },
+            {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
                 use: [ { loader: 'url-loader', options: { limit: 1024 * 10 } } ]
             }
@@ -56,7 +73,22 @@ module.exports = {
             hash: true,
             title: 'Custom template',
             template: 'index.html'
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, '../public/iconfont'), // 将src/assets下的文件
+                to: './public/iconfont' // 复制到public
+            },
+            {
+                from: path.resolve(__dirname, '../public/amfeFlexible'),
+                to: './public/amfeFlexible'
+            }
+            // ,
+            // {
+            //     from: path.resolve(__dirname, '../src/assets/music'),
+            //     to: './public/music'
+            // }
+        ])
     ],
     optimization: {
         splitChunks: {

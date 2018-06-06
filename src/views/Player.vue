@@ -1,22 +1,18 @@
 <template>
-    <div class="playSong"  v-unmove="false" v-show="controlShow">
+    <div class="playSong"  v-show="controlShow">
         <div class="playSong-box">
             <div class="playSong-img" :style="{backgroundImage:'url('+imgUrl+')'}">
             </div>
             <div class="play-header">
-                <svg class="icon play-back" aria-hidden="true" @click="controlNoShow">
-                    <use xlink:href="#icon-zuojiantou"></use>
-                </svg>
+                <i class="icon iconfont icon-zuojiantou" @click="controlNoShow"></i>
                 <div class="play-info">我是名称123</div>
-                <svg class="icon play-share" aria-hidden="true">
-                    <use xlink:href="#icon-fenxiang"></use>
-                </svg>
+                <i class="icon iconfont icon-fenxiang"></i>
             </div>
             <div class="play-lrc">
                 <ul :style="{transform : transform}" >
                     <li class="lrc-li" v-for="(val,key) in lrcLi.obj" 
                     :data-time="key" 
-                    :class="{active:currentLrc(key,$event)}">{{val}}</li>
+                    :class="{active:currentLrc(key)}">{{val}}</li>
                 </ul>
             </div>
             <div class="play-footer">
@@ -44,7 +40,7 @@
 </template>
 
 <script>
-import { myAjax, lrcRegular } from '&/utils/utils.js'
+import { myAjax, lrcRegular } from 'root/utils/utils'
 export default {
       name: 'v-play',
       data () {
@@ -59,8 +55,8 @@ export default {
               iconLeft: 0,
               progressWidth: 0,
               transform: '',
-              imgUrl: require('~/play/background.jpg'),
-              musicSrc: require('@/music/一直很安静.mp3')
+              imgUrl: require('images/play/background.jpg'),
+              musicSrc: require('~/music/yzhaj.mp3')
           }
       },
       beforeRouteEnter (to, from, next) {
@@ -93,7 +89,7 @@ export default {
               console.log(12)
               this.$router.push({ name: 'Home' })
           },
-          currentLrc (time, e) {
+          currentLrc (time) {
               let index = this.lrcLi.regularTime.findIndex((x) => x == time)
               if (this.playTime < this.lrcLi.regularTime[index + 1] && this.playTime > this.lrcLi.regularTime[index]) {
                   this.transform = `translate3d(0,-${index * 0.8}rem,0)`
@@ -139,7 +135,7 @@ export default {
           // console.log(this.progressWidth.offsetWidth )
 
           // 获取歌词
-          myAjax(require('@/lrc/yzhaj.lrc'), true).then(
+          myAjax(require('~/music/yzhaj.lrc'), true).then(
               lrc => { return lrcRegular(lrc) } // 获取对象歌词链式调用
           ).then(
               res => {

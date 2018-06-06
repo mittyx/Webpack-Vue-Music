@@ -1,8 +1,8 @@
 <template>
-    <footer class="control" @click="trolShow()">
+    <footer class="control">
         <!-- <router-link :to="{ name: 'player', params: { songId: yzhaj }}">User</router-link> -->
         <div class="cover"><img src="../assets/musicInfo/cover.jpg"/></div>
-        <div class="info">
+        <div class="info" @click="playShow">
             <div class="name">一直很安静</div>
             <div class="singer">阿桑</div>
         </div>
@@ -21,7 +21,8 @@ export default {
         }
     },
     methods: {
-        trolShow () {
+        playShow () {
+            this.$router.push({name: 'player', params: { songId:'yzhaj' }})
         }
     }
 }

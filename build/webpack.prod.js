@@ -2,7 +2,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const webpackBaseConfig = require('./webpack.base.js')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = merge(webpackBaseConfig, {
@@ -32,16 +32,6 @@ module.exports = merge(webpackBaseConfig, {
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css'
-        }),
-        new CopyWebpackPlugin([
-            {
-                from: path.resolve(__dirname, '../public/iconfont'), // 将src/assets下的文件
-                to: './public/iconfont' // 复制到public
-            },
-            {
-                from: path.resolve(__dirname, '../public/amfeFlexible'),
-                to: './public/amfeFlexible'
-            }
-        ])
+        })
     ]
 })
