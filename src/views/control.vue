@@ -7,8 +7,8 @@
             <div class="singer">阿桑</div>
         </div>
         <div class="cont">
-            <i class="icon iconfont icon-bofang"></i>
-            <i class="icon iconfont icon-caidan1"></i>
+            <i :class="[ $store.state.Xplay ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']"  @click.stop = "play"></i>
+            <i class="icon iconfont icon-icon-"></i>
         </div>
     </footer>
 </template>
@@ -23,6 +23,9 @@ export default {
     methods: {
         playShow () {
             this.$router.push({name: 'player', params: { songId:'yzhaj' }})
+        },
+        play () {
+            this.$store.commit('Mplay')
         }
     }
 }

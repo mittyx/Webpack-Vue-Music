@@ -23,14 +23,23 @@
             display: flex;
             z-index: 3;
             .play-back,.play-info,.play-share{height: 100%;box-sizing: border-box;z-index: 3;}
-            .play-back{width: 1.4rem;padding: 0 0.3rem;}
-            .play-info{flex-grow:1;}
-            .play-share{width: 1.4rem;padding: 0 0.3rem;}
+            .play-back,.play-share{padding: .1rem 0.3rem; font-size: 30px;width: 1.4rem;}
+            .play-info{
+                flex-grow:1;
+                display: flex;
+                flex-direction: column;
+                .name{
+                    flex: 1;
+                }
+                .singer{
+                    flex: 1;
+                }
+            }
         }
         .play-lrc{
             z-index: 3;
             flex-grow: 1;
-            overflow:auto;
+            overflow:hidden;
             ul{
                 transition: all .5s;
                 padding: 6rem 0;
@@ -92,7 +101,24 @@
                     }
                 }
             }
-            
+            .module-control{
+                height:1.5rem;
+                display: flex;
+                i{
+                    flex: 1;
+                    font-size: 30px;
+                    align-items:center;
+                    justify-content:center;
+                    display: flex;
+                }
+                i:before{
+                    align-items:center;
+                    justify-content:center;
+                }
+                .broadcast{
+                    
+                }
+            }
         }
     }
 }

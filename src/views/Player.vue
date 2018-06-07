@@ -5,7 +5,10 @@
             </div>
             <div class="play-header">
                 <i class="icon iconfont icon-zuojiantou play-back" @click="controlNoShow"></i>
-                <div class="play-info">我是名称123</div>
+                <div class="play-info">
+                    <div class="name">一直很安静</div>
+                    <div class="singer">阿桑</div>
+                </div>
                 <i class="icon iconfont icon-fenxiang play-share"></i>
             </div>
             <div class="play-lrc">
@@ -23,8 +26,14 @@
                     </div>
                     <time class="maxTime" v-html="maxTime">00:00</time>
                 </div>
-                <div style="height:1.5rem;background:red;" @click.stop = "play"></div>
+                <div class="module-control">
+                    <i class="icon iconfont icon-icon-9"></i>
+                    <i class="icon iconfont icon-icon-4"></i>
+                    <i :class="[ $store.state.Xplay ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "play"></i>
+                    <i class="icon iconfont icon-icon-3"></i>
+                    <i class="icon iconfont icon-icon-1"></i>
                 </div>
+            </div>
         </div>
     </div>
 </template>
@@ -61,12 +70,7 @@ export default {
             this.audio.currentTime = (this.audio.duration * value) / 100
         },
         play () {
-            if (this.audio.paused) {
-                this.audio.play()
-                this.maxTime = this.$options.methods.getTime(parseInt(this.audio.duration))
-            } else {
-                this.audio.pause()
-            }
+            this.$store.commit('Mplay')
         },
         getTime (sec) {
             if (sec === '00:00') { return sec }
@@ -90,6 +94,9 @@ export default {
         }
     },
     computed: {
+        isPlay () {
+            return this.$store.state.Xplay
+        },
         playTime () {
             return this.getTime(this.currentTime) || '00:00'
         },
@@ -97,6 +104,14 @@ export default {
         getValue () { return this.schedule }
     },
     watch: {
+        isPlay (val) {
+            if (val) {
+                this.audio.play()
+                this.maxTime = this.$options.methods.getTime(parseInt(this.audio.duration))
+            } else {
+                this.audio.pause()
+            }
+        },
         getValue (val) {
             this.value = val
         },
@@ -122,6 +137,3 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-    
-</style>

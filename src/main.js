@@ -26,11 +26,18 @@ const store = new Vuex.Store({
     state: {
         homeScroll: 'visible',
         navNum: 0, // 当前touch的位置
+        Xplay: false,
         controlShow: false // 播放界面
     },
-    // 使用方法 $store.commit('sheelShow')
+    // 使用方法 $store.commit('Mplay')
     mutations: {
-        sheelShow: state => {
+        Mplay: state => {
+            !state.Xplay ? state.Xplay = true : state.Xplay = false
+        }
+    },
+    getters: {
+        getPlayState: state => {
+            return !state.Xplay
         }
     }
 })
