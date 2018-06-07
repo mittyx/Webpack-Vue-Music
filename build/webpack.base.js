@@ -92,13 +92,20 @@ module.exports = {
     ],
     optimization: {
         splitChunks: {
-            chunks: 'all',
+            chunks: "async",
+    minSize: 30000,
+    minChunks: 1,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '~',
+    name: true,
             cacheGroups: {
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'initial',
                     name: 'vendors',
-                    minChunks: 1
+                    minChunks: 1,
+                    priority: -10
                 },
                 common: {// ‘src/js’ 下的js文件
                     chunks: 'all',

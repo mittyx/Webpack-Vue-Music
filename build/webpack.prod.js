@@ -2,7 +2,7 @@ const path = require('path')
 const merge = require('webpack-merge')
 const webpackBaseConfig = require('./webpack.base.js')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = merge(webpackBaseConfig, {
@@ -32,6 +32,9 @@ module.exports = merge(webpackBaseConfig, {
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css'
+        }),
+        new UglifyJsPlugin({
+            test: /\.js($|\?)/i
         })
     ]
 })
