@@ -34,7 +34,15 @@ module.exports = merge(webpackBaseConfig, {
             filename: '[name].css'
         }),
         new UglifyJsPlugin({
-            test: /\.js($|\?)/i
+            test: /\.js($|\?)/i,
+            uglifyOptions: {
+                warnings: false,
+                compress: {
+                    drop_console: true, // 去除日志
+                    drop_debugger: true// 去除debugger
+                }
+            },
+            parallel: true
         })
     ]
 })

@@ -6,7 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: {
         './public/polyfills': './public/polyfills.js',
-        main: './src/main.js'
+        main: './src/main.js',
+        mock: ['mockjs']
     },
     output: {
         filename: '[name].js',
@@ -92,29 +93,30 @@ module.exports = {
     ],
     optimization: {
         splitChunks: {
-            chunks: "async",
-    minSize: 30000,
-    minChunks: 1,
-    maxAsyncRequests: 5,
-    maxInitialRequests: 3,
-    automaticNameDelimiter: '~',
-    name: true,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            chunks: 'async',
             cacheGroups: {
+                default: {
+		            minChunks: 2,
+		            priority: -20,
+		            reuseExistingChunk: true
+		        },
+                commons: {
+		            name: 'commons',
+		            chunks: 'initial',
+		            minChunks: 2
+		        },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
-                    chunks: 'initial',
-                    name: 'vendors',
-                    minChunks: 1,
-                    priority: -10
+                    chunks: 'async',
+                    name: 'vendors'
+                    // priority: -10
                 },
-                common: {// ‘src/js’ 下的js文件
-                    chunks: 'all',
-                    test: /[\\/]src[\\/]js[\\/]/, // 也可以值文件/[\\/]src[\\/]js[\\/].*\.js/
-                    name: 'common', // 生成文件名，依据output规则
-                    minChunks: 2,
-                    maxInitialRequests: 5,
-                    minSize: 0,
-                    priority: 1
+                mock: {
+                    chunks: 'async',
+                    name: 'mock',
+                    priority: -10
                 }
             }
         },
