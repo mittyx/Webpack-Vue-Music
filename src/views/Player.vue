@@ -131,6 +131,7 @@ export default {
                 }
             }
         }, 500)
+        console.log('zjiadba')
         this.audio.addEventListener('timeupdate', function (e) {
             _this.currentTime = parseInt(this.currentTime)
             _this.schedule = parseInt((this.currentTime / this.duration) * 100)

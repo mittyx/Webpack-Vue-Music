@@ -98,15 +98,15 @@ module.exports = {
             chunks: 'async',
             cacheGroups: {
                 default: {
-		            minChunks: 2,
-		            priority: -20,
-		            reuseExistingChunk: true
-		        },
+                    minChunks: 2,
+                    priority: -20,
+                    reuseExistingChunk: true
+                },
                 commons: {
-		            name: 'commons',
-		            chunks: 'initial',
-		            minChunks: 2
-		        },
+                    name: 'commons',
+                    chunks: 'initial',
+                    minChunks: 2
+                },
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'async',
