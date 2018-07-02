@@ -120,6 +120,17 @@ export default {
     mounted () {
         this.audio = new Audio(this.musicSrc)
         let _this = this
+        this.audio.addEventListener('progress', function (e) {
+            console.log(this.buffered)
+        })
+         var bufferInterval = setInterval(() => {
+            if (_this.audio.readyState === 4){
+                console.log(_this.audio.buffered.end(0) , _this.audio.duration)
+                if (_this.audio.buffered.end(0) === _this.audio.duration){
+                    clearInterval(bufferInterval)
+                }
+            }
+        }, 500)
         this.audio.addEventListener('timeupdate', function (e) {
             _this.currentTime = parseInt(this.currentTime)
             _this.schedule = parseInt((this.currentTime / this.duration) * 100)
