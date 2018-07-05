@@ -91,4 +91,13 @@ let sheel2 = Mock.mock('http://sheel2.cn',function (options) {
         return result
     }
 })
-export default { song, hot, swipes, sheel, sheel2 }
+
+let musicList = Mock.mock('http://musicList.cn', {
+    'status': '0',
+    'musicListData': [
+        {name: '一直很安静', src: require('~/music/yzhaj.mp3'), time: 251},
+        {name: '冰雨', src: require('~/music/bingyu.mp3'), time: 350},
+        {name: '瑠璃色の地球', src: require('~/music/広瀬すず - 瑠璃色の地球.mp3'), time: 305}
+    ]
+})
+export default { song, hot, swipes, sheel, sheel2, musicList }

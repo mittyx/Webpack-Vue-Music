@@ -38,7 +38,6 @@ module.exports = merge(webpackBaseConfig, {
             uglifyOptions: {
                 warnings: false,
                 compress: {
-                    drop_console: true, // 去除日志
                     drop_debugger: true// 去除debugger
                 }
             },

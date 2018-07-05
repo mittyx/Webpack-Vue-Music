@@ -4,7 +4,7 @@
             <div class="playSong-img" :style="{backgroundImage:'url('+imgUrl+')'}">
             </div>
             <div class="play-header">
-                <i class="icon iconfont icon-zuojiantou play-back" @click="controlNoShow"></i>
+                <i class="icon iconfont icon-zuojiantou play-back" @click="homeShow"></i>
                 <div class="play-info">
                     <div class="name">一直很安静</div>
                     <div class="singer">阿桑</div>
@@ -30,7 +30,7 @@
                     <i class="icon iconfont icon-icon-9"></i>
                     <i class="icon iconfont icon-icon-4"></i>
                     <i :class="[ $store.state.Xplay ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "play"></i>
-                    <i class="icon iconfont icon-icon-3"></i>
+                    <i class="icon iconfont icon-icon-3" @click.stop = "next"></i>
                     <i class="icon iconfont icon-icon-1"></i>
                 </div>
             </div>
@@ -39,20 +39,17 @@
 </template>
 
 <script>
-import { myAjax, lrcRegular } from 'root/utils/utils'
+import { myAjax, lrcRegular, getSec } from 'root/utils/utils'
+import { musicList } from 'root/mock/mock'
 export default {
     name: 'v-play',
     data () {
         return {
-            audio: {},
-            schedule: 0,
-            currentTime: '00:00',
-            maxTime: '00:00',
+            audio: {}, lrcLi: {},
+            schedule: 0, iconLeft: 0, value: 0,
+            currentTime: '00:00', maxTime: '00:00',
             controlShow: false,
-            lrcLi: { },
-            iconLeft: 0,
             transform: '',
-            value: 0,
             imgUrl: require('images/play/background.jpg'),
             musicSrc: require('~/music/yzhaj.mp3')
         }
@@ -72,14 +69,11 @@ export default {
         play () {
             this.$store.commit('Mplay')
         },
-        getTime (sec) {
-            if (sec === '00:00') { return sec }
-            let second = sec % 60, minute = Math.floor(sec / 60)
-            minute < 10 && (minute = '0' + minute)
-            second < 10 && (second = '0' + second)
-            return minute + ':' + second
+        next() {
+            this.audio.src = require('~/music/bingyu.mp3')
+            this.audio.play()
         },
-        controlNoShow () {
+        homeShow () {
             this.controlShow = false
             this.$store.state.homeScroll = 'visible'
             this.$router.push({ name: 'Home' })
@@ -97,20 +91,18 @@ export default {
         isPlay () {
             return this.$store.state.Xplay
         },
+
         playTime () {
-            return this.getTime(this.currentTime) || '00:00'
+            return getSec(this.currentTime) || '00:00'
         },
+
+        // 双向绑定
         getState () { return this.$store.state.controlShow },
         getValue () { return this.schedule }
     },
     watch: {
         isPlay (val) {
-            if (val) {
-                this.audio.play()
-                this.maxTime = this.$options.methods.getTime(parseInt(this.audio.duration))
-            } else {
-                this.audio.pause()
-            }
+            !this.audio.paused ? this.audio.pause() : this.audio.play()
         },
         getValue (val) {
             this.value = val
@@ -118,33 +110,43 @@ export default {
         getState (val) { this.controlShow = val }
     },
     mounted () {
-        this.audio = new Audio(this.musicSrc)
         let _this = this
-        this.audio.addEventListener('progress', function (e) {
-            console.log(this.buffered)
-        })
-         var bufferInterval = setInterval(() => {
-            if (_this.audio.readyState === 4){
-                console.log(_this.audio.buffered.end(0) , _this.audio.duration)
-                if (_this.audio.buffered.end(0) === _this.audio.duration){
-                    clearInterval(bufferInterval)
-                }
+        this.$ajax.get('http://musicList.cn').then(res => {
+            // console.log(res.data.musicListData[0].src)
+            _this.audio = new Audio(res.data.musicListData[0].src)
+            // 获取歌词
+            myAjax(require('~/music/yzhaj.lrc'), true).then(
+                lrc => { this.lrcLi = lrcRegular(lrc) } // 获取对象歌词链式调用
+            )          
+            return _this.audio
+        }).then(
+            res => {
+                res.addEventListener('durationchange', function (e) {
+                    _this.maxTime = getSec(parseInt(this.duration))
+                })
+                return res
             }
-        }, 500)
-        console.log('zjiadba')
-        this.audio.addEventListener('timeupdate', function (e) {
-            _this.currentTime = parseInt(this.currentTime)
-            _this.schedule = parseInt((this.currentTime / this.duration) * 100)
-        })
-
-        // 获取歌词
-        myAjax(require('~/music/yzhaj.lrc'), true).then(
-            lrc => { return lrcRegular(lrc) } // 获取对象歌词链式调用
         ).then(
             res => {
-                this.lrcLi = res
+                res.addEventListener('progress', function (e) {
+                    if (this.readyState === 4){
+                        console.log(res.buffered, res.buffered.end(0), this.duration)
+                        if (this.buffered.end(0) === this.duration){
+                            console.log('成功')
+                        }
+                    }
+                })
+                return res
+            }
+        ).then(
+            res => {
+                res.addEventListener('timeupdate', function (e) {
+                    _this.currentTime = parseInt(this.currentTime)
+                    _this.schedule = parseInt((this.currentTime / this.duration) * 100)
+                })
             }
         )
+        .catch((error) => console.log(error))
     }
 }
 </script>

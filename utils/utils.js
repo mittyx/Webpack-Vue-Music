@@ -25,10 +25,10 @@ export function lrcRegular (lrc) {
     return {obj, regularTime, regularLyric}
 }
 // 秒转分秒
-export function minSec (arg) {
-    if (arg === '00:00') { return arg }
-    let second = arg % 60
-    let minute = Math.floor(arg / 60)
+export function getSec (sec) {
+    if (sec === '00:00') { return sec }
+    let second = sec % 60
+    let minute = Math.floor(sec / 60)
     minute < 10 && (minute = '0' + minute)
     second < 10 && (second = '0' + second)
     return minute + ':' + second

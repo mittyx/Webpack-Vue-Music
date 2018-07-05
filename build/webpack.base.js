@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: {
         './public/polyfills': './public/polyfills.js',
-        main: './src/main.js',
-        mock: ['mockjs']
+        mock: ['mockjs'],
+        main: './src/main.js'
     },
     output: {
         filename: '[name].js',

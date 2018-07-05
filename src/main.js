@@ -8,12 +8,16 @@ import { Swipe, SwipeItem, Tab, Tabs, Cell, CellGroup, Collapse, CollapseItem, P
 import '~/css/joggle.scss'
 
 Vue.use(Vuex)
+
+// vant
 Vue.use(Swipe).use(SwipeItem).use(Tab).use(Tabs).use(Collapse).use(CollapseItem).use(Cell).use(CellGroup).use(Progress).use(Slider)
 
 Vue.config.productionTip = false
 
+// 全局axios
 Vue.prototype.$ajax = axios
 
+// 懒加载
 Vue.use(VueLazyload, {
     preLoad: 1.3,
     error: require('images/lazyload/loader.gif'),
