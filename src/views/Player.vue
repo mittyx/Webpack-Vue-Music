@@ -46,12 +46,11 @@ export default {
     data () {
         return {
             audio: {}, lrcLi: {},
-            schedule: 0, iconLeft: 0, value: 0,
+            schedule: 0, value: 0,
             currentTime: '00:00', maxTime: '00:00',
             controlShow: false,
             transform: '',
-            imgUrl: require('images/play/background.jpg'),
-            musicSrc: require('~/music/yzhaj.mp3')
+            imgUrl: require('images/play/background.jpg')
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -70,7 +69,7 @@ export default {
             this.$store.commit('Mplay')
         },
         next() {
-            this.audio.src = require('~/music/bingyu.mp3')
+            this.audio.src = require('~/music/広瀬すず - 瑠璃色の地球.mp3')
             this.audio.play()
         },
         homeShow () {
@@ -102,7 +101,7 @@ export default {
     },
     watch: {
         isPlay (val) {
-            !this.audio.paused ? this.audio.pause() : this.audio.play()
+            !this.$store.state.Xplay ? this.audio.pause() : this.audio.play()
         },
         getValue (val) {
             this.value = val
@@ -121,7 +120,7 @@ export default {
             return _this.audio
         }).then(
             res => {
-                res.addEventListener('durationchange', function (e) {
+                res.addEventListener('canplay', function (e) {
                     _this.maxTime = getSec(parseInt(this.duration))
                 })
                 return res
