@@ -95,9 +95,9 @@ let sheel2 = Mock.mock('http://sheel2.cn',function (options) {
 let musicList = Mock.mock('http://musicList.cn', {
     'status': '0',
     'musicListData': [
-        {name: '一直很安静', src: require('~/music/yzhaj.mp3'), time: 251},
-        {name: '冰雨', src: require('~/music/bingyu.mp3'), time: 350},
-        {name: '瑠璃色の地球', src: require('~/music/広瀬すず - 瑠璃色の地球.mp3'), time: 305}
+        {songName: '一直很安静', singerName: '阿桑', src: require('~/music/yzhaj.mp3'), time: 251},
+        {songName: '冰雨', singerName: '刘德华', src: require('~/music/bingyu.mp3'), time: 350},
+        {songName: '瑠璃色の地球', singerName: '広瀬すず', src: require('~/music/広瀬すず - 瑠璃色の地球.mp3'), time: 305}
     ]
 })
 export default { song, hot, swipes, sheel, sheel2, musicList }
