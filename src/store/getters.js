@@ -13,15 +13,5 @@ export default{
             return ''
         }
         return state.songList[state.curPlayIndex].singerName
-    },
-    playPaused: state => {
-        if (state.audio === null) {
-            return false
-        }
-        if (state.audio.paused) {
-            return false
-        } else {
-            return true
-        }
     }
 }

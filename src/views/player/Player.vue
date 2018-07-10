@@ -12,10 +12,9 @@
                 <i class="icon iconfont icon-fenxiang play-share"></i>
             </header>
             <div class="play-lrc">
-                <ul :style="{transform : transform}" >
-                    <li class="lrc-li" v-for="(val,key) in lrcLi.obj" 
-                    :data-time="key" 
-                    :class="{active:currentLrc(key)}">{{val}}</li>
+                <ul :style="{ transform : transform }"  ref="lrcUl">
+                    <li class="lrc-li" v-for="(val, key) in lrcLi.obj" 
+                    :data-time="key">{{ val }}</li>
                 </ul>
             </div>
             <play-operate></play-operate>
@@ -55,24 +54,26 @@ export default {
     },
     methods: {
         homeShow () {
-            // this.controlShow = false
             this.$store.state.homeScroll = 'visible'
             this.$router.push({ name: 'Home' })
-        },
-        currentLrc (time) {
-            let index = this.lrcLi.regularTime.findIndex((x) => x == time)
-            if (this.playTime < this.lrcLi.regularTime[index + 1] && this.playTime > this.lrcLi.regularTime[index]) {
-                this.transform = `translate3d(0,-${index * 0.8}rem,0)`
-                return true
-            }
-            return false
         }
-    },  
+    },
     mounted () {
         // 获取歌词
         myAjax(require('~/music/yzhaj.lrc'), true).then(
             lrc => { this.lrcLi = lrcRegular(lrc) } // 获取对象歌词链式调用
         )
+        let _this = this, index = 0;
+        this.$store.state.audio.ontimeupdate = function(){
+            if(getSec(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00'){
+                if(index != 0){
+                    _this.$refs.lrcUl.children[index - 1].className = ''
+                    _this.$refs.lrcUl.children[index].className = 'active'
+                }
+                _this.transform = `translate3d(0,-${index * 0.8}rem,0)`
+                index++
+            }
+        }
     }
 }
 </script>
