@@ -61,6 +61,7 @@ module.exports = {
         extensions: ['.js', '.vue'],
         alias: {
             '~': path.resolve(__dirname, '../src/assets/'),
+            src: path.resolve(__dirname, '../src/'),
             root: path.resolve(__dirname, '../'),
             images: path.resolve(__dirname, '../src/assets/images')
         }

@@ -2,6 +2,8 @@
     <footer class="play-footer">
         <div class="module-Time" >
             <time class="playTime">{{ playTime }}</time>
+            <div class="progress-box"></div>
+            <music-progress></music-progress>
             <!-- <div class="progress-box">
                 <van-slider v-model="value" @change="onChange" />
             </div> -->
