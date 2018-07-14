@@ -1,7 +1,7 @@
 <template>
     <div class="songList">
         <div class="wrapper" >
-            <ul class="viewport" v-bind:style="{width : viewWidth ,transform : transform,transitionDuration:transitionDuration}">
+            <ul class="viewport" v-bind:style="{width: viewWidth, transform: transform, transitionDuration: transitionDuration}">
                 <li class="item" v-for="item,index in liNum"
                     @touchstart='touchStart(index)'
                     @touchmove='touchMove(index)'

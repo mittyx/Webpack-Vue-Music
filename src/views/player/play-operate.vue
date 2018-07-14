@@ -3,7 +3,7 @@
         <div class="module-Time" >
             <time class="playTime">{{ playTime }}</time>
             <div class="progress-box"></div>
-            <music-progress></music-progress>
+            <music-progress :value="progressValue" @change="onChange"></music-progress>
             <!-- <div class="progress-box">
                 <van-slider v-model="value" @change="onChange" />
             </div> -->
@@ -16,7 +16,6 @@
             <i class="icon iconfont icon-icon-3" @click.stop = "next"></i>
             <i class="icon iconfont icon-icon-1"></i>
         </div>
-        <audio :src=""
     </footer>
 </template>
 
@@ -29,9 +28,9 @@ export default{
             currentTime: '00:00',
             maxTime: '00:00',
             schedule: 0,
-            value: 0
+            progressValue: 0
         }
-    }
+    },
     // computed: {
     //     isPlay () {
     //         return this.$store.state.Xplay
@@ -53,11 +52,12 @@ export default{
     //     },
     //     getState (val) { this.controlShow = val }
     // },
-    // methods: {
-    //     onChange(value) {
+    methods: {
+        onChange(value) {
+            console.log(value)
     //         if (this.audio.paused) { this.audio.play() }
     //         this.audio.currentTime = (this.audio.duration * value) / 100
-    //     },
+        },
     //     play () {
     //         this.$store.commit('Mplay')
     //     },
@@ -65,6 +65,6 @@ export default{
     //         this.audio.src = require('~/music/広瀬すず - 瑠璃色の地球.mp3')
     //         this.audio.play()
     //     },
-    // }
+    }
 }
 </script>
