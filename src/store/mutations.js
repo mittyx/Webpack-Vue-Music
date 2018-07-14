@@ -4,9 +4,12 @@ export default {
     },
     playPaused: state => {
         if (state.audio.paused) {
-            state.paused = false
-        } else {
+            state.audio.play()
             state.paused = true
+        } else {
+            state.audio.pause()
+            state.paused = false
         }
     }
+    
 }

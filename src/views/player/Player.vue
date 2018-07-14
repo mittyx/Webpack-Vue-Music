@@ -24,8 +24,8 @@
 
 <script>
 import PlayOperate from './play-operate'
-import { myAjax, lrcRegular, getSec } from 'root/utils/utils'
-import { mapGetters } from 'vuex'
+import { myAjax, lrcRegular, formatDate } from 'root/utils/utils'
+import { mapGetters, mapState } from 'vuex'
 import { musicList } from 'root/mock/mock'
 export default {
     name: 'v-play',
@@ -47,6 +47,9 @@ export default {
         'play-operate': PlayOperate
     },
     computed: {
+        ...mapState([
+            'getCurTime'
+        ]),
         ...mapGetters([
             'curPlaySingerName',
             'curPlaySongName'
@@ -65,7 +68,8 @@ export default {
         )
         let _this = this, index = 0;
         this.$store.state.audio.ontimeupdate = function(){
-            if(getSec(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00'){
+            _this.$store.state.getCurTime = this.currentTime
+            if(formatDate(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00'){
                 if(index != 0){
                     _this.$refs.lrcUl.children[index - 1].className = ''
                     _this.$refs.lrcUl.children[index].className = 'active'

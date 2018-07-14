@@ -28,6 +28,16 @@ export default {
             progressValue: this.value
         }
     },
+    computed: {
+        tsValue() {
+            return this.value
+        }
+    },
+    watch: {
+        tsValue(val) {
+            this.progressValue = val
+        } 
+    },
     methods: {
         onTouchStart(event) {
             this.touchStart(event)
@@ -79,6 +89,7 @@ $music-progress: 3px;
     border-radius: 100%;
     background-color: white;
     z-index: 2;
+    transition: all .05s;
   }
   .cache{
     position: absolute;

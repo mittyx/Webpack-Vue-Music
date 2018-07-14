@@ -25,7 +25,7 @@ export function lrcRegular (lrc) {
     return {obj, regularTime, regularLyric}
 }
 // 秒转分秒
-export function getSec (sec) {
+export function formatDate (sec) {
     if (sec === '00:00') { return sec }
     let second = sec % 60
     let minute = Math.floor(sec / 60)

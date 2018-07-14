@@ -13,5 +13,8 @@ export default{
             return ''
         }
         return state.songList[state.curPlayIndex].singerName
+    },
+    getDurTime: state => {
+        return state.audio.duration
     }
 }

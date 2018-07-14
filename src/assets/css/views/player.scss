@@ -64,7 +64,7 @@
             $Time-height : 0.5rem;
             .module-Time{
                 display: flex;
-                .playTime,.maxTime{
+                .playTime,.curTime{
                     font-size: 12px;
                     line-height:$Time-height;
                     padding: 0 0.25rem; 

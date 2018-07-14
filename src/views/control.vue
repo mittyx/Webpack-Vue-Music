@@ -27,7 +27,6 @@ export default {
         ...mapGetters([
             'curPlaySingerName',
             'curPlaySongName',
-            'playPaused'
         ])
     },
     methods: {
@@ -35,7 +34,6 @@ export default {
             this.$router.push({name: 'player', params: { songId:'yzhaj' }})
         },
         play () {
-            this.$store.state.audio.play()
             this.$store.commit('playPaused')
         },
         next () {

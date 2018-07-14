@@ -1,13 +1,13 @@
 <template>
     <footer class="play-footer">
         <div class="module-Time" >
-            <time class="playTime">{{ playTime }}</time>
+            <time class="playTime">{{ getCurTime }}</time>
             <div class="progress-box"></div>
-            <music-progress :value="progressValue" @change="onChange"></music-progress>
+            <music-progress :value="progressValue1" @change="onChange"></music-progress>
             <!-- <div class="progress-box">
                 <van-slider v-model="value" @change="onChange" />
             </div> -->
-            <time class="maxTime">{{ maxTime }}</time>
+            <time class="curTime">{{ getDurTime }}</time>
         </div>
         <div class="module-control">
             <i class="icon iconfont icon-icon-9"></i>
@@ -20,15 +20,28 @@
 </template>
 
 <script>
+import { formatDate } from 'root/utils/utils'
+import { mapGetters, mapState } from 'vuex'
 export default{
     name: 'playerOperate',
     data() {
         return {
-            playTime: '00:00',
-            currentTime: '00:00',
-            maxTime: '00:00',
             schedule: 0,
-            progressValue: 0
+            progressValue1: 0
+        }
+    },
+    computed:{
+        getCurTime() {
+            return formatDate( parseInt(this.$store.state['getCurTime']) )
+        },
+        getDurTime() { 
+            return formatDate( parseInt(this.$store.getters['getDurTime']) ) 
+        }
+    },
+    watch: {
+        getCurTime(val) {
+           this.progressValue1 = Math.round( (this.$store.state['getCurTime'] / this.$store.getters['getDurTime']) *100)
+        //    console.log( this.progressValue1 )
         }
     },
     // computed: {
