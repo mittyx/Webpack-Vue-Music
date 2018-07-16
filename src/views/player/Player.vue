@@ -24,7 +24,7 @@
 
 <script>
 import PlayOperate from './play-operate'
-import { myAjax, lrcRegular, formatDate } from 'root/utils/utils'
+import { myAjax, lrcRegular, formatDate, minTOsec } from 'root/utils/utils'
 import { mapGetters, mapState } from 'vuex'
 import { musicList } from 'root/mock/mock'
 export default {
@@ -68,10 +68,21 @@ export default {
         )
         let _this = this, index = 0;
         this.$store.state.audio.ontimeupdate = function(){
+            // onchang定位 
+            while (index < _this.lrcLi.regularTime.length - 1 && Math.round(this.currentTime) > minTOsec(_this.lrcLi.regularTime[index])) {
+                index++
+            }
+            while (index < _this.lrcLi.regularTime.length - 1 && Math.round(this.currentTime) < minTOsec(_this.lrcLi.regularTime[index])) {
+                index--
+            }
+            
             _this.$store.state.getCurTime = this.currentTime
-            if(formatDate(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00'){
+
+            if (formatDate(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00') {
                 if(index != 0){
-                    _this.$refs.lrcUl.children[index - 1].className = ''
+                    for(let dom of _this.$refs.lrcUl.children){
+                        dom.className = ''
+                    }
                     _this.$refs.lrcUl.children[index].className = 'active'
                 }
                 _this.transform = `translate3d(0,-${index * 0.8}rem,0)`

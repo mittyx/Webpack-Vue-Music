@@ -3,7 +3,7 @@
         <div class="module-Time" >
             <time class="playTime">{{ getCurTime }}</time>
             <div class="progress-box"></div>
-            <music-progress :value="progressValue1" @change="onChange"></music-progress>
+            <music-progress :value="progressValue" @change="onChange"></music-progress>
             <!-- <div class="progress-box">
                 <van-slider v-model="value" @change="onChange" />
             </div> -->
@@ -12,7 +12,7 @@
         <div class="module-control">
             <i class="icon iconfont icon-icon-9"></i>
             <i class="icon iconfont icon-icon-4"></i>
-            <i :class="[ $store.state.Xplay ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "play"></i>
+            <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "play"></i>
             <i class="icon iconfont icon-icon-3" @click.stop = "next"></i>
             <i class="icon iconfont icon-icon-1"></i>
         </div>
@@ -27,10 +27,13 @@ export default{
     data() {
         return {
             schedule: 0,
-            progressValue1: 0
+            progressValue: 0
         }
     },
     computed:{
+        ...mapState([
+            'paused'
+        ]),
         getCurTime() {
             return formatDate( parseInt(this.$store.state['getCurTime']) )
         },
@@ -40,8 +43,7 @@ export default{
     },
     watch: {
         getCurTime(val) {
-           this.progressValue1 = Math.round( (this.$store.state['getCurTime'] / this.$store.getters['getDurTime']) *100)
-        //    console.log( this.progressValue1 )
+           this.progressValue = Math.round( (this.$store.state['getCurTime'] / this.$store.getters['getDurTime']) *100)
         }
     },
     // computed: {
@@ -67,13 +69,12 @@ export default{
     // },
     methods: {
         onChange(value) {
-            console.log(value)
-    //         if (this.audio.paused) { this.audio.play() }
-    //         this.audio.currentTime = (this.audio.duration * value) / 100
+            this.progressValue = value
+            this.$store.commit('playCurTime', value)
         },
-    //     play () {
-    //         this.$store.commit('Mplay')
-    //     },
+        play () {
+            this.$store.commit('playPaused')
+        }
     //     next() {
     //         this.audio.src = require('~/music/広瀬すず - 瑠璃色の地球.mp3')
     //         this.audio.play()

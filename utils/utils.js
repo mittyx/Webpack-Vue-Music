@@ -34,6 +34,13 @@ export function formatDate (sec) {
     return minute + ':' + second
 }
 
+// 秒转分
+export function minTOsec (time) {
+    let min = time.split(':')[0]
+    let sec = time.split(':')[1]
+    return Number(min*60) + Number(sec)
+}
+
 // LocalStorage的类
 export class LocalStorageCLass {
     constructor () {

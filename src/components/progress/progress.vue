@@ -4,8 +4,8 @@
  */
 
 <template>
-  <div class="musicProgress" ref="progress"  @click.stop="onClick($event)">
-    <div class="ball" @click.stop="ts($event)" :style="{ transform: 'translate3d('+ progressValue +'px,0,0)' }" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd"></div>
+  <div class="musicProgress" id="ls" ref="progress" @click.stop="onClick($event)">
+    <div class="ball" @click.stop="ts($event)" :style="{ transform: 'translate3d('+ pxValue +'px,0,0)' }" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd"></div>
     <div class="cache" :style="{ width: cacheWidth + '%' }"></div>
   </div>
 </template>
@@ -25,39 +25,39 @@ export default {
         return {
             cacheWidth: 10,
             touchMoveFixed: 0,
-            progressValue: this.value
+            pxValue: 0
         }
     },
     computed: {
-        tsValue() {
+        progressValue() {
             return this.value
         }
     },
     watch: {
-        tsValue(val) {
-            this.progressValue = val
+        progressValue(val) {
+            this.pxValue = this.$refs.progress.clientWidth * (val / 100)
         } 
     },
     methods: {
         onTouchStart(event) {
             this.touchStart(event)
-            this.touchMoveFixed = this.progressValue
+            this.touchMoveFixed = this.pxValue
         },
         onTouchMove(event) {
             this.touchMove(event)
-            this.progressValue = this.deltaX + this.touchMoveFixed
-            if (this.progressValue < 0) {
-                this.progressValue = 0
-            }else if(this.progressValue > this.$refs.progress.clientWidth){
-                this.progressValue = this.$refs.progress.clientWidth
+            this.pxValue = this.deltaX + this.touchMoveFixed
+            if (this.pxValue < 0) {
+                this.pxValue = 0
+            }else if(this.pxValue > this.$refs.progress.clientWidth){
+                this.pxValue = this.$refs.progress.clientWidth
             }
         },
         onTouchEnd() {
-            this.updateValue(this.progressValue, true)
+            this.updateValue(this.pxValue, true)
         },
         onClick(e) {
-            this.progressValue = e.offsetX
-            this.updateValue(this.progressValue, true)
+            this.pxValue = e.offsetX
+            this.updateValue(this.pxValue, true)
         },
         updateValue(value, end) {
             let getVal =  Math.round((value / this.$refs.progress.clientWidth) * 100)
@@ -89,7 +89,7 @@ $music-progress: 3px;
     border-radius: 100%;
     background-color: white;
     z-index: 2;
-    transition: all .05s;
+    transition: all .05s
   }
   .cache{
     position: absolute;
