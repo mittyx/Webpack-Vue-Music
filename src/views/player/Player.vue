@@ -68,25 +68,15 @@ export default {
         )
         let _this = this, index = 0;
         this.$store.state.audio.ontimeupdate = function(){
-            // onchang定位 
-            while (index < _this.lrcLi.regularTime.length - 1 && Math.round(this.currentTime) > minTOsec(_this.lrcLi.regularTime[index])) {
-                index++
-            }
-            while (index < _this.lrcLi.regularTime.length - 1 && Math.round(this.currentTime) < minTOsec(_this.lrcLi.regularTime[index])) {
-                index--
-            }
-            
             _this.$store.state.getCurTime = this.currentTime
-
-            if (formatDate(parseInt(this.currentTime)) == _this.lrcLi.regularTime[index] || _this.lrcLi.regularTime[index] == '00:00') {
-                if(index != 0){
+            for (let i in _this.lrcLi.regularTime) {
+                if (formatDate(parseInt(this.currentTime)) === _this.lrcLi.regularTime[i]) {
                     for(let dom of _this.$refs.lrcUl.children){
                         dom.className = ''
                     }
-                    _this.$refs.lrcUl.children[index].className = 'active'
+                    _this.$refs.lrcUl.children[i].className = 'active'
+                    _this.transform = `translate3d(0,-${i * 0.8}rem,0)`
                 }
-                _this.transform = `translate3d(0,-${index * 0.8}rem,0)`
-                index++
             }
         }
     }

@@ -7,14 +7,14 @@
             <div class="singer">{{ curPlaySingerName }}</div>
         </div>
         <div class="cont">
-            <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']"  @click.stop = "play"></i>
+            <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']"  @click.stop = "playPaused"></i>
             <i class="icon iconfont icon-icon-"></i>
         </div>
     </footer>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapMutations } from 'vuex'
 export default {
     data () {
         return {
@@ -30,11 +30,11 @@ export default {
         ])
     },
     methods: {
+        ...mapMutations([
+            'playPaused'
+        ]),
         playShow () {
             this.$router.push({name: 'player', params: { songId:'yzhaj' }})
-        },
-        play () {
-            this.$store.commit('playPaused')
         },
         next () {
             this.$store.state.curPlayIndex = 1
@@ -42,9 +42,12 @@ export default {
     },
     mounted () {
         this.$ajax.get('http://musicList.cn').then(res => {
-            this.$store.state.songList = res.data.musicListData
-            this.$store.state.audio = new Audio(res.data.musicListData[0].src)
-            this.$store.state.curPlayIndex = 0
+            let _store = this.$store.state
+            _store.songList = res.data.musicListData
+            _store.audio = new Audio(res.data.musicListData[0].src)
+            _store.audio.load()
+            this.$store.dispatch('getDurTime')
+            _store.curPlayIndex = 0
         })
     }
 }

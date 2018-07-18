@@ -10,9 +10,9 @@
             <time class="curTime">{{ getDurTime }}</time>
         </div>
         <div class="module-control">
-            <i class="icon iconfont icon-icon-9"></i>
-            <i class="icon iconfont icon-icon-4"></i>
-            <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "play"></i>
+            <i class="icon iconfont" :class="getPlayMode" @click.stop = "setPlayMode"></i>
+            <i class="icon iconfont icon-icon-4" @click.stop = "prev"></i>
+            <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "playPaused"></i>
             <i class="icon iconfont icon-icon-3" @click.stop = "next"></i>
             <i class="icon iconfont icon-icon-1"></i>
         </div>
@@ -21,7 +21,7 @@
 
 <script>
 import { formatDate } from 'root/utils/utils'
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState, mapMutations, mapActions } from 'vuex'
 export default{
     name: 'playerOperate',
     data() {
@@ -34,11 +34,14 @@ export default{
         ...mapState([
             'paused'
         ]),
+        ...mapGetters([
+            'getPlayMode'
+        ]),
         getCurTime() {
             return formatDate( parseInt(this.$store.state['getCurTime']) )
         },
-        getDurTime() { 
-            return formatDate( parseInt(this.$store.getters['getDurTime']) ) 
+        getDurTime() {
+            return formatDate( parseInt(this.$store.getters['getDurTime']) )
         }
     },
     watch: {
@@ -46,39 +49,25 @@ export default{
            this.progressValue = Math.round( (this.$store.state['getCurTime'] / this.$store.getters['getDurTime']) *100)
         }
     },
-    // computed: {
-    //     isPlay () {
-    //         return this.$store.state.Xplay
-    //     },
-
-    //     playTime () {
-    //         return getSec(this.currentTime) || '00:00'
-    //     },
-
-    //     // 双向绑定
-    //     getValue () { return this.schedule }
-    // },
-    // watch: {
-    //     isPlay (val) {
-    //         !this.$store.state.Xplay ? this.audio.pause() : this.audio.play()
-    //     },
-    //     getValue (val) {
-    //         this.value = val
-    //     },
-    //     getState (val) { this.controlShow = val }
-    // },
     methods: {
+        ...mapMutations([
+            'playPaused'
+        ]),
+        ...mapActions([
+            'next',
+            'prev'
+        ]),
+        setPlayMode(){
+            if(this.$store.state['playMode'] < 2) {
+                this.$store.state['playMode']++
+            }else {
+                this.$store.state['playMode'] = 0
+            }
+        },
         onChange(value) {
             this.progressValue = value
             this.$store.commit('playCurTime', value)
-        },
-        play () {
-            this.$store.commit('playPaused')
         }
-    //     next() {
-    //         this.audio.src = require('~/music/広瀬すず - 瑠璃色の地球.mp3')
-    //         this.audio.play()
-    //     },
     }
 }
 </script>

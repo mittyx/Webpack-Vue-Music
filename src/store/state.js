@@ -4,7 +4,9 @@ export default {
     controlShow: false, //  control点击进入播放界面
     Xplay: false,
     audio: null,
+    duration: '00:00',
     getCurTime: 0,
+    playMode: 0,
     paused: false,
     songList: [],
     curPlayIndex: -1
