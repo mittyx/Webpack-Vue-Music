@@ -97,7 +97,10 @@ let musicList = Mock.mock('http://musicList.cn', {
     'musicListData': [
         {songName: '一直很安静', singerName: '阿桑', src: require('~/music/yzhaj.mp3'), time: 251},
         {songName: '冰雨', singerName: '刘德华', src: require('~/music/bingyu.mp3'), time: 350},
-        {songName: '瑠璃色の地球', singerName: '広瀬すず', src: require('~/music/広瀬すず - 瑠璃色の地球.mp3'), time: 305}
+        {songName: 'Lemon', singerName: '米津玄師', src: require('~/music/米津玄師 - Lemon.mp3'), time: 305},
+        {songName: '逍遥叹', singerName: '奇然', src: require('~/music/奇然 - 逍遥叹.mp3'), time: 305},
+        {songName: '瑠璃色の地球', singerName: '広瀬すず', src: require('~/music/広瀬すず - 瑠璃色の地球.mp3'), time: 305},
+        {songName: ' Happy Sunshine', singerName: '伊藤かな恵', src: require('~/music/伊藤かな恵 - Happy Sunshine.mp3'), time: 305}
     ]
 })
 export default { song, hot, swipes, sheel, sheel2, musicList }

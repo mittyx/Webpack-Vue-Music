@@ -47,6 +47,7 @@ export default {
             _store.audio = new Audio(res.data.musicListData[0].src)
             _store.audio.load()
             this.$store.dispatch('getDurTime')
+            this.$store.dispatch('audioEnded')
             _store.curPlayIndex = 0
         })
     }

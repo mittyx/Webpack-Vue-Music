@@ -1,3 +1,6 @@
+/*
+ * ps:action中不能得到mutation的return
+ */
 import { getRandomIntInclusive } from 'root/utils/utils'
 export default {
     Mplay: state => {
@@ -23,31 +26,54 @@ export default {
         state.audio.src = state.songList[n].src
         state.audio.load()
     },
-    strategiesN: (state, n) => {
-        var strateFun = {
-            '0': index => {
-                return index
+    strategiesN: (state, cmd) => {
+        if (state.songList.length < 2) {
+            return false
+        }
+
+        let _setFun = cmd => {
+            if (cmd === 'next' || cmd === 'auto') {
+                if (state.curPlayIndex === state.songList.length - 1) {
+                    state.curPlayIndex = 0
+                } else {
+                    state.curPlayIndex++
+                }
+            } else if (cmd === 'prev') {
+                if (state.curPlayIndex === 0) {
+                    state.curPlayIndex = state.songList.length - 1
+                } else {
+                    state.curPlayIndex--
+                }
+            }
+        }
+        // 策略模式state.curPlayIndex播放模式
+        let _strateFun = {
+            '0': cmd => {
+                _setFun(cmd)
             },
-            '1': index => {
-                return index
+            '1': cmd => {
+                if (cmd === 'auto') {
+                    return false
+                }
+                _setFun(cmd)
             },
-            '2': index => {
-                if (state.songList.length < 1) {
-                    console.log(index)
-                    return index
+            '2': cmd => {
+                console.log(state.songList)
+                if (state.songList.length < 2) {
+                    return false
                 } else {
                     let recursion = () => {
                         let random = getRandomIntInclusive(0, state.songList.length - 1)
-                        if (index === random) {
+                        if (state.curPlayIndex === random) {
                             recursion()
                         } else {
-                            return random
+                            state.curPlayIndex = random
                         }
                     }
                     recursion()
                 }
             }
         }
-        return strateFun[state.playMode](n)
+        return _strateFun[state.playMode](cmd)
     }
 }
