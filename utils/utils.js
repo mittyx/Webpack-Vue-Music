@@ -68,6 +68,7 @@ export class LocalStorageCLass {
         return this._localArrayJsonParse
     }
     addValue (val) {
+        console.log(123)
         let localArray = JSON.parse(this._localArray)
         if (localArray.length > this._localArrayLength) {
             if (!~localArray.indexOf(val)) {
