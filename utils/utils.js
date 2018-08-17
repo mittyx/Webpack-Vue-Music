@@ -52,38 +52,33 @@ export class LocalStorageCLass {
     constructor () {
         this._localArrayLength = 5
         this._localArray = localStorage.getItem('localData')
-        this._init()
+        this._isEmpty()
+        this._limitLength()
     }
-    _init (localArrayLength) {
+    _isEmpty () {
         if (this._localArray === null) {
             localStorage.setItem('localData', '[]')
             this._localArray = localStorage.getItem('localData')
         }
-        if (JSON.parse(this._localArray).length > this._localArrayLength) {
-            JSON.parse(this._localArray).splice(this._localArrayLength - 1, JSON.parse(this._localArray).length - (this._localArrayLength - 1))
+    }
+    _limitLength () {
+        this._localArray = JSON.parse(this._localArray)
+        if (this._localArray.length > this._localArrayLength) {
+            this._localArray.length = this._localArrayLength
         }
     }
     getValue () {
-        this._localArrayJsonParse = [...new Set(JSON.parse(this._localArray))]
+        this._localArrayJsonParse = [...new Set(this._localArray)]
         return this._localArrayJsonParse
     }
     addValue (val) {
-        console.log(12356)
-        let localArray = JSON.parse(this._localArray)
-        if (localArray.length > this._localArrayLength) {
-            if (!~localArray.indexOf(val)) {
-                localArray.shift()
-                localArray.push(val)
+        if (this._localArray.length > this._localArrayLength) {
+            if (!~this._localArray.indexOf(val)) {
+                this._localArray.shift()
             } else {
-                localArray.splice(localArray.indexOf(val), 1)
-                localArray[localArray.length] = val
+                this._localArray.splice(this._localArray.indexOf(val), 1)
             }
-        } else {
-            localArray[localArray.length] = val
         }
-        this._localArray = JSON.stringify(localArray)
-    }
-    ts () {
-        console.log(1)
+        this._localArray[this._localArray.length] = val
     }
 }

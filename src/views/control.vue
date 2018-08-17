@@ -42,13 +42,12 @@ export default {
     },
     mounted () {
         this.$ajax.get('http://musicList.cn').then(res => {
-            let _store = this.$store.state
-            _store.songList = res.data.musicListData
-            _store.audio = new Audio(res.data.musicListData[0].src)
-            _store.audio.load()
+            this.$store.state.songList = res.data.musicListData
+            this.$store.state.audio = new Audio(res.data.musicListData[0].src)
+            this.$store.state.audio.load()
             this.$store.dispatch('getDurTime')
             this.$store.dispatch('audioEnded')
-            _store.curPlayIndex = 0
+            this.$store.state.curPlayIndex = 0
         })
     }
 }

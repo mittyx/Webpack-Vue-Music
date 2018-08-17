@@ -4,7 +4,7 @@
         leave-active-class="animated fadeOutDown" >
 	    <div class="search"  :value="value" v-show="searchShow">
 	        <div class="search-header"> 
-                <div class="out"><i class="icon iconfont icon-47" @click="cancel"></i></div>
+                <div class="out"><i class="icon iconfont icon-47" @click="onCancelBtn"></i></div>
 	        	<div class="input">
 	        		<div class="case">
 	        			<input name="search" class="inSearch" placeholder="搜索你想要的歌曲" v-model="searchVal" @keyup="searchEnter($event,searchVal)">
@@ -18,7 +18,7 @@
 	        <div class="hotSea">
 	        	<p class="text">热门搜索</p> 
 	        	<ul class="hotList">
-	        		<li v-for="item in hotSearch" @click="onSearch(item.songName)">{{ item.songName }}</li>
+	        		<li v-for="item in hotSearch" @click="onSearchBtn(item.songName)">{{ item.songName }}</li>
 	        	</ul>
 	        </div>
 	        <div class="history">
@@ -67,20 +67,21 @@ export default {
         }
     },
     methods: {
-        cancel () {
+        onCancelBtn () {
             this.searchShow = false
             this.$router.push('/')
         },
-        onSearch (song) {
-            this.newLocalStorageCLass.addValue(song)
+        showSearchList(val) {
+            this.newLocalStorageCLass.addValue(val)
             this.localData = this.newLocalStorageCLass.getValue()
             localStorage.setItem('localData', JSON.stringify(this.localData))
         },
+        onSearchBtn (song) {
+            this.$options.methods.showSearchList.call(this,song)
+        },
         searchEnter (e, val) {
             if (e.keyCode == 13) {
-                this.newLocalStorageCLass.addValue(val)
-                this.localData = this.newLocalStorageCLass.getValue()
-                localStorage.setItem('localData', JSON.stringify(this.localData))
+                this.$options.methods.showSearchList.call(this,song)
             }
         }
     },

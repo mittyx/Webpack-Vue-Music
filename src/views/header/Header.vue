@@ -1,8 +1,8 @@
 <template>
     <header class="header">
         <div class="head">
-            <i class="icon iconfont icon-caidan head-icon" @click="goMeunShow()"></i>
-            <i class="icon iconfont icon-iconfontzhizuobiaozhun22 head-icon" @click="goSeaShow()"></i>
+            <i class="icon iconfont icon-caidan head-icon" @click="onMeunShow()"></i>
+            <i class="icon iconfont icon-iconfontzhizuobiaozhun22 head-icon" @click="onSearchShow()"></i>
         </div>
         <v-Meun v-model="headerMeunShow"></v-Meun>
         <transition name="fade">
@@ -23,10 +23,10 @@ export default {
         }
     },
     methods: {
-        goMeunShow () {
+        onMeunShow () {
             this.headerMeunShow = true
         },
-        goSeaShow () {
+        onSearchShow () {
             this.headerSearchShow = true
         }
     },

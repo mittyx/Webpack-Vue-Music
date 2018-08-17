@@ -74,19 +74,20 @@ export default {
             this.touch.endX = event.changedTouches[0].clientX
             let moveX = this.touch.startX - this.touch.endX
             if (moveX > 0) {
-                if (index === this.liNum - 1) {
-                    this.transform = "translate3d(-"+index+"00vw,0,0)";
-                } else {
-                    if (moveX > this.touch.clientWidth / 6) {
-                        if(!this.dir){return false}else{this.$store.state.navNum = index + 1}
-                    } else {
-                         this.transform = "translate3d(-"+index+"00vw,0,0)"
-                    }
+                if (index !== this.liNum - 1) {
+                    this.$options.methods.oneSixth.call(this, moveX, index + 1)
                 }
-            } else {
-                if (Math.abs(moveX) > this.touch.clientWidth / 6) {
-                    if(!this.dir){return false}else{this.$store.state.navNum = index - 1}
-                } else {this.transform = "translate3d(-"+index+"00vw,0,0)"}
+                this.transform = "translate3d(-"+index+"00vw,0,0)";
+                return
+            }
+            this.$options.methods.oneSixth.call(this, Math.abs(moveX), index - 1)
+            this.transform = "translate3d(-"+index+"00vw,0,0)";
+        },
+        oneSixth (paramX, operating) {
+            if (paramX > this.touch.clientWidth / 6) {
+                if(this.dir) {
+                    this.$store.state.navNum = operating
+                }
             }
         }
     },
