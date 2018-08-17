@@ -52,15 +52,15 @@ export class LocalStorageCLass {
     constructor () {
         this._localArrayLength = 5
         this._localArray = localStorage.getItem('localData')
-        this._init()
+        this._initLocalStorage(_localArray)
     }
-    _init (localArrayLength) {
-        if (this._localArray === null) {
+    _init (_localArray) {
+        if (_localArray === null) {
             localStorage.setItem('localData', '[]')
-            this._localArray = localStorage.getItem('localData')
+            _localArray = localStorage.getItem('localData')
         }
-        if (JSON.parse(this._localArray).length > this._localArrayLength) {
-            JSON.parse(this._localArray).splice(this._localArrayLength - 1, JSON.parse(this._localArray).length - (this._localArrayLength - 1))
+        if (JSON.parse(_localArray).length > this._localArrayLength) {
+            JSON.parse(_localArray).splice(this._localArrayLength - 1, JSON.parse(_localArray).length - (this._localArrayLength - 1))
         }
     }
     getValue () {
