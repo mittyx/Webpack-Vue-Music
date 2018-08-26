@@ -1933,7 +1933,11 @@ copy-webpack-plugin@^4.5.1:
     p-limit "^1.0.0"
     serialize-javascript "^1.4.0"
 
-core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0:
+core-js@^2.4.0:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
+
+core-js@^2.4.1, core-js@^2.5.0:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.6.tgz#0fe6d45bf3cac3ac364a9d72de7576f4eb221b9d"
 
@@ -7332,11 +7336,11 @@ validate-npm-package-license@^3.0.1:
     spdx-expression-parse "^3.0.0"
 
 vant@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/vant/-/vant-1.1.5.tgz#cef549fe3a7cb6449f2f731fe31c420aa795cb5b"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/vant/-/vant-1.2.1.tgz#ff37e4def7f26952be2de1c10c58513c9eb0fdb0"
   dependencies:
     babel-runtime "6.x"
-    vue-lazyload "^1.2.3"
+    vue-lazyload "1.2.3"
 
 vary@~1.1.2:
   version "1.1.2"
@@ -7405,7 +7409,7 @@ vue-hot-reload-api@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
 
-vue-lazyload@^1.2.3:
+vue-lazyload@1.2.3, vue-lazyload@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/vue-lazyload/-/vue-lazyload-1.2.3.tgz#901f9ec15c7e6ca78781a2bae4a343686bdedb2c"
 

@@ -41,7 +41,7 @@ export default create({
     this.handler(true);
 
     if (this.immediateCheck) {
-      this.$nextTick(this.onScroll);
+      this.$nextTick(this.check);
     }
   },
 
@@ -50,27 +50,25 @@ export default create({
   },
 
   activated() {
-    /* istanbul ignore next */
     this.handler(true);
   },
 
   deactivated() {
-    /* istanbul ignore next */
     this.handler(false);
   },
 
   watch: {
     loading() {
-      this.$nextTick(this.onScroll);
+      this.$nextTick(this.check);
     },
 
     finished() {
-      this.$nextTick(this.onScroll);
+      this.$nextTick(this.check);
     }
   },
 
   methods: {
-    onScroll() {
+    check() {
       if (this.loading || this.finished) {
         return;
       }
@@ -80,7 +78,7 @@ export default create({
       const scrollerHeight = utils.getVisibleHeight(scroller);
 
       /* istanbul ignore next */
-      if (!scrollerHeight || utils.getComputedStyle(el).display === 'none') {
+      if (!scrollerHeight || utils.getComputedStyle(el).display === 'none' || el.offsetParent === null) {
         return;
       }
 
@@ -111,7 +109,7 @@ export default create({
       /* istanbul ignore else */
       if (this.binded !== bind) {
         this.binded = bind;
-        (bind ? on : off)(this.scroller, 'scroll', this.onScroll);
+        (bind ? on : off)(this.scroller, 'scroll', this.check);
       }
     }
   }

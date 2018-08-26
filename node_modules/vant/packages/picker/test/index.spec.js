@@ -1,7 +1,6 @@
 import Picker from '../';
 import PickerColumn from '../PickerColumn';
-import { mount } from '@vue/test-utils';
-import { triggerDrag } from '../../../test/touch-utils';
+import { mount, triggerDrag, later } from '../../../test/utils';
 
 const simpleColumn = ['1990', '1991', '1992', '1993', '1994', '1995'];
 const columns = [
@@ -27,7 +26,7 @@ test('simple columns confirm & cancel event', () => {
   wrapper.find('.van-picker__cancel').trigger('click');
   expect(wrapper.emitted('confirm')[0]).toEqual(['1990', 0]);
   expect(wrapper.emitted('cancel')[0]).toEqual(['1990', 0]);
-  wrapper.vm.$destroy();
+  wrapper.destroy();
 });
 
 test('multiple columns confirm & cancel event', () => {
@@ -102,21 +101,19 @@ test('drag simple columns', () => {
   expect(wrapper.emitted('change')[0][1]).toEqual('1992');
 });
 
-test('column watch default index', () => {
+test('column watch default index', async() => {
   const disabled = { disabled: true, text: 1 };
   const wrapper = mount(PickerColumn, {
     propsData: {
+      initialOptions: [disabled, ...simpleColumn],
       valueKey: 'text',
       itemHeight: 50
     }
   });
-  wrapper.vm.options = [disabled, ...simpleColumn];
-  expect(wrapper.html()).toMatchSnapshot();
 
-  wrapper.vm.options = [disabled, ...simpleColumn];
-  expect(wrapper.html()).toMatchSnapshot();
+  await later();
+  expect(wrapper).toMatchSnapshot();
 
-  wrapper.vm.options = [1, disabled, disabled, disabled];
   wrapper.vm.defaultIndex = 2;
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 });

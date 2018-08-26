@@ -31,10 +31,30 @@ export default {
 <van-checkbox v-model="checked" disabled>Checkbox</van-checkbox>
 ```
 
-#### Disable Label click event
+#### Custom Icon
+Use icon slot to custom icon
 
 ```html
-<van-checkbox v-model="checked" label-disabled>Checkbox</van-checkbox>
+<van-checkbox v-model="checked">
+  Custom Icon
+  <img
+    slot="icon"
+    slot-scope="props"
+    :src="props.checked ? icon.active : icon.normal"
+  >
+</van-checkbox>
+```
+
+```js
+export default {
+  data() {
+    checked: true,
+    icon: {
+      normal: '//img.yzcdn.cn/icon-normal.png',
+      active: '//img.yzcdn.cn/icon-active.png'
+    }
+  }
+}
 ```
 
 #### Checkbox Group
@@ -82,21 +102,39 @@ export default {
 ```html
 <van-checkbox-group v-model="result">
   <van-cell-group>
-    <van-cell v-for="item in list" :title="`Checkbox ${item}`" :key="item">
-      <van-checkbox :name="item" />
+    <van-cell
+      v-for="item in list"
+      clickable
+      :key="item"
+      :title="`Checkbox ${item}`"
+      @click="toggle(index)"
+    >
+      <van-checkbox :name="item" ref="checkboxes" />
     </van-cell>
   </van-cell-group>
 </van-checkbox-group>
 ```
 
+```js
+export default {
+  methods: {
+    toggle(index) {
+      this.$refs.checkboxes[index].toggle();
+    }
+  }
+}
+```
+
+
 ### Checkbox API
 
 | Attribute | Description | Type | Default |
 |-----------|-----------|-----------|-------------|
-| v-model | Check status | `Boolean` | `false` |
 | name | Checkbox name | `any` | - |
+| v-model | Check status | `Boolean` | `false` |
 | disabled | Diable checkbox | `Boolean` | `false` |
 | label-disabled | Whether to disable label click | `Boolean` | `false` |
+| label-position | Can be set to `left` | `String` | `right` |
 | shape | Can be set to `round` `square` | `String` | `round` |
 
 ### CheckboxGroup API
@@ -118,3 +156,18 @@ export default {
 | Event | Description | Parameters |
 |-----------|-----------|-----------|
 | change | Triggered when value changed | current value |
+
+### Checkbox Slot
+
+| Name | Description | slot-scope |
+|-----------|-----------|-----------|
+| default | Custom label | - |
+| icon | Custom icon | checked: whether to be checked |
+
+### Checkbox Methods
+
+Use ref to get checkbox instance and call instance methods
+
+| Name | Attribute | Return value | Description |
+|-----------|-----------|-----------|-------------|
+| toggle | - | - | Toggle check status |

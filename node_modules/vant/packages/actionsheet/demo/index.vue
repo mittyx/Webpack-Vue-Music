@@ -2,12 +2,18 @@
   <demo-section>
     <demo-block :title="$t('basicUsage')">
       <van-button @click="show1 = true">{{ $t('button1') }}</van-button>
-      <van-actionsheet v-model="show1" :actions="actions" />
+      <van-actionsheet v-model="show1" :actions="actions" @select="onSelect" />
     </demo-block>
 
     <demo-block :title="$t('title2')">
       <van-button @click="show2 = true">{{ $t('button2') }}</van-button>
-      <van-actionsheet v-model="show2" :actions="actions" :cancel-text="$t('cancel')" @cancel="handleCancel" />
+      <van-actionsheet
+        v-model="show2"
+        :actions="actions"
+        :cancel-text="$t('cancel')"
+        @cancel="onCancel"
+        @select="onSelect"
+      />
     </demo-block>
 
     <demo-block :title="$t('title3')">
@@ -28,7 +34,8 @@ export default {
       button3: '弹出带标题的 Actionsheet',
       title2: '带取消按钮的 Actionsheet',
       title3: '带标题的 Actionsheet',
-      description: '描述信息'
+      description: '描述信息',
+      disabledOption: '禁用选项'
     },
     'en-US': {
       button1: 'Show Actionsheet',
@@ -36,7 +43,8 @@ export default {
       button3: 'Show Actionsheet with title',
       title2: 'Actionsheet with cancel button',
       title3: 'Actionsheet with title',
-      description: 'Description'
+      description: 'Description',
+      disabledOption: 'Disabled Option'
     }
   },
 
@@ -51,20 +59,23 @@ export default {
   computed: {
     actions() {
       return [
-        { name: this.$t('option'), callback: this.onClick },
+        { name: this.$t('option') },
         { name: this.$t('option'), subname: this.$t('description') },
-        { name: this.$t('option'), loading: true }
+        { loading: true },
+        { name: this.$t('disabledOption'), disabled: true }
       ];
     }
   },
 
   methods: {
-    onClick(item) {
-      Toast(item.name);
+    onSelect(item) {
+      this.show1 = false;
+      this.show2 = false;
+      this.$toast(item.name);
     },
 
-    handleCancel() {
-      Toast('cancel');
+    onCancel() {
+      this.$toast('cancel');
     }
   }
 };
@@ -72,10 +83,6 @@ export default {
 
 <style lang="postcss">
 .demo-actionsheet {
-  .actionsheet-wx {
-    color: #06bf04;
-  }
-
   .van-button {
     margin-left: 15px;
   }

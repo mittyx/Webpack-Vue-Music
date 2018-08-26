@@ -1,23 +1,28 @@
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '../../../test/utils';
 import Actionsheet from '../';
 
 test('callback events', () => {
   const callback = jest.fn();
-  const wrapper = shallowMount(Actionsheet, {
+  const wrapper = mount(Actionsheet, {
     propsData: {
+      value: true,
       actions: [
         { name: 'Option', callback },
-        { name: 'Option' }
+        { name: 'Option', disabled: true }
       ],
       cancelText: 'Cancel'
     }
   });
 
-  wrapper.findAll('li').trigger('click');
+  const options = wrapper.findAll('li');
+  options.at(0).trigger('click');
+  options.at(1).trigger('click');
   wrapper.find('.van-actionsheet__cancel').trigger('click');
 
   expect(callback.mock.calls.length).toBe(1);
   expect(wrapper.emitted('cancel')).toBeTruthy();
   expect(wrapper.emitted('input')[0][0]).toBeFalsy();
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper.emitted('select')[0][0]).toBeTruthy();
+  expect(wrapper.emitted('select')[0][1]).toBeFalsy();
+  expect(wrapper).toMatchSnapshot();
 });

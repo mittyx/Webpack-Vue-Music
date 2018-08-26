@@ -1,5 +1,5 @@
 import SubmitBar from '../';
-import { mount } from '@vue/test-utils';
+import { mount } from '../../../test/utils';
 
 test('submit', () => {
   const wrapper = mount(SubmitBar, {
@@ -9,7 +9,7 @@ test('submit', () => {
     }
   });
 
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 
   // disabled
   const button = wrapper.find('.van-button');

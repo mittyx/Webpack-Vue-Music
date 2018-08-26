@@ -48,9 +48,9 @@ export default {
 
 | Attribute | Description | Type | Default |
 |-----------|-----------|-----------|-------------|
+| v-model | Current value | `String | Number` | Min value |
 | min | Min value | `String | Number` | `1` |
 | max | Max value | `String | Number` | - |
-| default-value | Default value | `String | Number` | `1` |
 | step | Value change step | `String | Number` | `1` |
 | integer | Whether to allow only integers | `Boolean` | `false` |
 | disabled | Disable value change | `Boolean` | `false` |
@@ -64,3 +64,4 @@ export default {
 | overlimit | Triggered when click disabled button | - |
 | plus | Triggered when click plus button | - |
 | minus | Triggered when click minus button | - |
+| blur | Triggered when input blured | - |

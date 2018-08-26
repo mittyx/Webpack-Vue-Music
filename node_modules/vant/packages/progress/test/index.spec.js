@@ -1,5 +1,5 @@
 import Progress from '../';
-import { mount } from '@vue/test-utils';
+import { mount } from '../../../test/utils';
 
 test('calc width', () => {
   const wrapper = mount(Progress, {
@@ -8,9 +8,9 @@ test('calc width', () => {
       percentage: 100
     }
   });
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 
   wrapper.vm.showPivot = true;
   wrapper.vm.pivotText = 'test';
-  expect(wrapper.html()).toMatchSnapshot();
+  expect(wrapper).toMatchSnapshot();
 });

@@ -19,6 +19,7 @@
     <demo-block :title="$t('title3')">
       <van-search
         v-model="value"
+        :placeholder="$t('placeholder')"
         show-action
         @search="onSearch"
       >
@@ -34,7 +35,7 @@ export default {
     'zh-CN': {
       title2: '监听对应事件',
       title3: '自定义行动按钮',
-      placeholder: '请输入商品名称'
+      placeholder: '请输入搜索关键词'
     },
     'en-US': {
       title2: 'Listen to Events',
@@ -51,19 +52,11 @@ export default {
 
   methods: {
     onSearch() {
-      Toast(this.value);
+      this.$toast(this.value);
     },
     onCancel() {
-      Toast(this.$t('cancel'));
+      this.$toast(this.$t('cancel'));
     }
   }
 };
 </script>
-
-<style lang="postcss">
-.demo-search {
-  .van-search__action div {
-    padding: 0 10px;
-  }
-}
-</style>

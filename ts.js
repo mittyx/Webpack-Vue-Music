@@ -17,4 +17,6 @@ class Me extends Person {
         console.log('load...')
         console.log(`${this.name} is haven't girlfriend`)
     }
+
+    
 }

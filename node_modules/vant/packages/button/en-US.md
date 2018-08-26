@@ -14,7 +14,17 @@ Vue.use(Button);
 ```html
 <van-button type="default">Default</van-button>
 <van-button type="primary">Primary</van-button>
+<van-button type="warning">Warning</van-button>
 <van-button type="danger">Danger</van-button>
+```
+
+#### Plain
+
+```html
+<van-button type="default" plain>Default</van-button>
+<van-button type="primary" plain>Primary</van-button>
+<van-button type="warning" plain>Warning</van-button>
+<van-button type="danger" plain>Danger</van-button>
 ```
 
 #### Size
@@ -48,34 +58,20 @@ Use `tag` prop to custom button tag
 </van-button>
 ```
 
-#### Action Button
-
-```html 
-<van-button type="primary" bottom-action>Button</van-button>
-
-<van-row>
-  <van-col span="12">
-    <van-button bottom-action>Button</van-button>
-  </van-col>
-  <van-col span="12">
-    <van-button type="primary" bottom-action>Button</van-button>
-  </van-col>
-</van-row>
-```
-
 ### API
 
 | Attribute | Description | Type | Default |
 |-----------|-----------|-----------|-------------|
-| type | Can be set to `default` `primary` `danger` | `String` | `default` |
+| type | Can be set to `primary` `warning` `danger` | `String` | `default` |
 | size | Can be set to `normal` `large` `small` `mini` | `String` | `normal` |
 | text | Text | `String` | - |
 | tag | Tag | `String` | `button` |
 | native-type | Native Type Attribute | `String` | `''` |
-| disabled | Whether disable button | `Boolean` | `false` |
+| plain | Whether to be plain button | `Boolean` | `false` |
+| disabled | Whether to disable button | `Boolean` | `false` |
 | loading | Whether show loading status | `Boolean` | `false` |
 | block | Whether to set display block | `Boolean` | `false` |
-| bottom-action | Whether to be action button | `Boolean` | `false` |
+| square | Whether to be square button | `Boolean` | `false` |
 
 ### Event
 

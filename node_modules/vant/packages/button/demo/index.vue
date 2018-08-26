@@ -1,9 +1,21 @@
 <template>
   <demo-section>
     <demo-block :title="$t('title1')">
-      <van-button type="default">{{ $t('default') }}</van-button>
-      <van-button type="primary">{{ $t('primary') }}</van-button>
+      <div class="demo-button-row">
+        <van-button type="default">{{ $t('default') }}</van-button>
+        <van-button type="primary">{{ $t('primary') }}</van-button>
+      </div>
+      <van-button type="warning">{{ $t('warning') }}</van-button>
       <van-button type="danger">{{ $t('danger') }}</van-button>
+    </demo-block>
+
+    <demo-block :title="$t('plain')">
+      <div class="demo-button-row">
+        <van-button type="default" plain>{{ $t('default') }}</van-button>
+        <van-button type="primary" plain>{{ $t('primary') }}</van-button>
+      </div>
+      <van-button type="warning" plain>{{ $t('warning') }}</van-button>
+      <van-button type="danger" plain>{{ $t('danger') }}</van-button>
     </demo-block>
 
     <demo-block :title="$t('title2')">
@@ -27,19 +39,6 @@
         {{ $t('button') }}
       </van-button>
     </demo-block>
-
-    <demo-block :title="$t('title5')">
-      <van-button type="primary" bottom-action>{{ $t('button') }}</van-button>
-
-      <van-row>
-        <van-col span="12">
-          <van-button bottom-action>{{ $t('button') }}</van-button>
-        </van-col>
-        <van-col span="12">
-          <van-button type="primary" bottom-action>{{ $t('button') }}</van-button>
-        </van-col>
-      </van-row>
-    </demo-block>
   </demo-section>
 </template>
 
@@ -55,10 +54,12 @@ export default {
       default: '默认按钮',
       primary: '主要按钮',
       danger: '危险按钮',
+      warning: '警告按钮',
       large: '大号按钮',
       normal: '普通按钮',
       small: '小型按钮',
-      mini: '迷你按钮'
+      mini: '迷你按钮',
+      plain: '朴素按钮'
     },
     'en-US': {
       title1: 'Type',
@@ -69,10 +70,12 @@ export default {
       default: 'Default',
       primary: 'Primary',
       danger: 'Danger',
+      warning: 'Warning',
       large: 'Large',
       normal: 'Normal',
       small: 'Small',
-      mini: 'Mini'
+      mini: 'Mini',
+      plain: 'Plain'
     }
   }
 };
@@ -83,8 +86,7 @@ export default {
   .van-button {
     user-select: none;
 
-    &--large,
-    &--bottom-action {
+    &--large {
       margin-bottom: 15px;
     }
 
@@ -104,6 +106,10 @@ export default {
 
   .van-doc-demo-block__title {
     padding-left: 0;
+  }
+
+  &-row {
+    margin-bottom: 10px;
   }
 }
 </style>

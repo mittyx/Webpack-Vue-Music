@@ -38,7 +38,7 @@ export function formatDate (sec) {
 export function minTOsec (time) {
     let min = time.split(':')[0]
     let sec = time.split(':')[1]
-    return Number(min*60) + Number(sec)
+    return Number(min * 60) + Number(sec)
 }
 
 export function getRandomIntInclusive (min, max) {
