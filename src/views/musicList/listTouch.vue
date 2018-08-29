@@ -92,7 +92,6 @@ export default {
         }
     },
     mounted () {
-		console.log(this)
         this.viewWidth = this.liNum + '00vw'
         // console.log(component("ss",List.render));
     }

@@ -5,6 +5,7 @@
         <v-nav></v-nav>
         <v-Musiclist></v-Musiclist>
         <v-control></v-control>
+        <v-info></v-info>
     </div>
 </template>
 
@@ -14,6 +15,7 @@ import Rolling from './rolling'
 import Nav from './nav'
 import MusicList from './musicList/MusicList'
 import Control from './control'
+import OperationInfo from './operationInfo'
 
 export default {
     name: 'Home',
@@ -22,7 +24,8 @@ export default {
         'v-rolling': Rolling,
         'v-nav': Nav,
         'v-Musiclist': MusicList,
-        'v-control': Control
+        'v-control': Control,
+        'v-info': OperationInfo
     },
     data () {
         return {
@@ -34,6 +37,8 @@ export default {
     },
     watch: {
         getState (val) { this.homeScroll = val }
+    },
+    mounted() {
     }
 }
 </script>

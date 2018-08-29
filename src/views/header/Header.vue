@@ -6,7 +6,7 @@
         </div>
         <v-Meun v-model="headerMeunShow"></v-Meun>
         <transition name="fade">
-            <div class="shade" v-show="headerMeunShow" @click="headerMeunShow = false;"></div>
+            <div class="shade shade-background" v-show="headerMeunShow" @click="headerMeunShow = false;"></div>
         </transition>
         <v-Search v-model="headerSearchShow"></v-Search>
     </header>
