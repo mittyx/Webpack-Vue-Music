@@ -1,7 +1,7 @@
 <template>
 	<div class="operationInfo">
         <div @click="ts">jsjsjs</div>
-        <v-popup :componentShow="show" :title="popupTitle">2333</v-popup>
+        <v-popup :componentShow="show" :title="popupTitle" :position="'right'">2333</v-popup>
 	</div>
 </template>
 
@@ -20,6 +20,7 @@ export default {
     methods: {
         ts () {
             this.show = !this.show
+            console.log(this.show)
         }
     },
     mounted() {

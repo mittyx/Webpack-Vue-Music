@@ -19,7 +19,7 @@
                 提供多样店铺模板，快速搭建网上商城
             </van-collapse-item>
         </van-collapse>
-        <van-popup v-model="show" position="left" :overlay="false">
+        <!-- <van-popup v-model="show" position="right" :overlay="false"> -->
   内容
 </van-popup>
         <!-- <van-popup v-model="show">内容</van-popup> -->
@@ -44,7 +44,6 @@ export default {
       },
       mounted() {
           console.log(this)
-          this.$shade.on()
       }
   }
 </script>
