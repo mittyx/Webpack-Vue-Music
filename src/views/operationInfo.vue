@@ -1,7 +1,7 @@
 <template>
 	<div class="operationInfo">
         <div @click="ts">jsjsjs</div>
-        <v-popup :componentShow="show" :title="popupTitle" :position="'right'">2333</v-popup>
+        <v-popup v-model="componentShow" :title="popupTitle" :position="'bottom'">2333</v-popup>
 	</div>
 </template>
 
@@ -13,14 +13,13 @@ export default {
     },
     data () {
         return {
-            show: true,
+            componentShow: true,
             popupTitle: '我是信息面板'
         }
     },
     methods: {
         ts () {
-            this.show = !this.show
-            console.log(this.show)
+            this.componentShow = !this.componentShow
         }
     },
     mounted() {

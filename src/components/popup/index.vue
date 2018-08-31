@@ -3,7 +3,7 @@
         name="slides"
         :enter-active-class="'animated ' + setEnterClass"
         :leave-active-class="'animated ' + setLeaveClass">
-        <div class="popup"   v-show="proxyShow" :class="position">
+        <div class="popup"  v-show="proxyShow" :class="position">
             <div class="pabel">
                 <p>{{ title }}</p>
                 <div class="list">
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import _ComponentShow from '../mixins/componentShow'
+import _ComponentShow from '../mixins/two-way-show'
 export default {
     name: 'popup',
     data() {
@@ -34,8 +34,7 @@ export default {
                 bottom: 'fadeOutDown'
             },
             setEnterClass: null,
-            setLeaveClass: null,
-            proxyShow: false
+            setLeaveClass: null
         }
     },
     props: {
@@ -50,24 +49,18 @@ export default {
     },
     mixins: [_ComponentShow.default],
     watch: {
-        componentShow(val) {
-            if(val) {
-                this.proxyShow = true
-                this.$shade.on(function(params) {
-                    this.proxyShow = false
-                 }.bind(this))
+        proxyShow(val) {
+            if (val) {
+                this.$shade.add()
             }
         }
     },
     mounted() {
         this.setEnterClass = this.FADE_IN[this.position]
         this.setLeaveClass = this.FADE_OUT[this.position]
-        if(this.componentShow) {
-            this.proxyShow = true
-            this.$shade.on(function(params) {
-                this.proxyShow = false
-            }.bind(this))
-        }
+        this.$shade.listen('callback', () => {
+            this.proxyShow = false
+        })
     }
 }
 </script>
