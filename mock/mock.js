@@ -103,4 +103,15 @@ let musicList = Mock.mock('http://musicList.cn', {
         {songName: ' Happy Sunshine', singerName: '伊藤かな恵', src: require('~/music/伊藤かな恵 - Happy Sunshine.mp3'), time: 305}
     ]
 })
-export default { song, hot, swipes, sheel, sheel2, musicList }
+
+let musicListSheel = Mock.mock('http://musicListSheel.cn', {
+    'status': '0',
+    'data': [
+        {title: '我喜欢的音乐', amount: '800首', background: require('images/listSheel/1.jpg')},
+        {title: '英文歌曲', amount: '200首', background: require('images/listSheel/2.jpg')},
+        {title: '日文歌曲', amount: '100首', background: require('images/listSheel/3.jpg')},
+        {title: '韩歌曲', amount: '100首', background: require('images/listSheel/4.jpg')}
+    ]
+})
+
+export default { song, hot, swipes, sheel, sheel2, musicList, musicListSheel }

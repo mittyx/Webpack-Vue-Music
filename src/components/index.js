@@ -1,12 +1,24 @@
-import musicProgress from './progress/progress'
+import MusicProgress from './progress/progress'
+import Popup from './popup'
+import Cell from './cell'
 
-musicProgress.install = function (Vue, options = {}) {
-    Vue.component(options.componentName || musicProgress.name, musicProgress)
+let components = [MusicProgress, Popup, Cell]
+
+const install = Vue => {
+    components.forEach(Component => {
+        Vue.component(Component.name, Component)
+    })
 }
 
-// auto install
+export {
+    MusicProgress,
+    Popup,
+    Cell
+}
+
+/* istanbul ignore if */
 if (typeof window !== 'undefined' && window.Vue) {
-    Vue.component(musicProgress.name, musicProgress)
+    install(window.Vue)
 }
 
-export default musicProgress
+export default install

@@ -1,17 +1,15 @@
 <template>
     <div class="mysong">
         <van-cell-group>
-            <van-cell title="我的音乐" icon="play"  is-link @click="popup"/>
-            <van-cell title="我的收藏" icon="like-o" is-link @click="popup"/>
-            <van-cell title="最近播放" icon="clock" is-link value="内容"  @click="popup"/>
+            <van-cell title="我的音乐" icon="play"  is-link />
+            <van-cell title="我的收藏" icon="like-o" is-link/>
+            <van-cell title="最近播放" icon="clock" is-link value="内容"/>
         </van-cell-group>
         <van-collapse v-model="activeNames">
             <van-collapse-item name="1">
                 <div slot="title"><van-icon name="wap-nav" /> 创建的歌单</div>
-                <div class="cell">
-                    <img />
-                    <div class="info"></div>
-                    <div class="btn"></div>
+                <div v-for="(item, index) in sheelList">
+                    <my-cell  :title="item.title" :content="item.amount" :obj="item" :background="item.background" @btnClick="more"></my-cell>
                 </div>
             </van-collapse-item>
              <van-collapse-item name="2">
@@ -19,10 +17,6 @@
                 提供多样店铺模板，快速搭建网上商城
             </van-collapse-item>
         </van-collapse>
-        <!-- <van-popup v-model="show" position="right" :overlay="false"> -->
-  内容
-</van-popup>
-        <!-- <van-popup v-model="show">内容</van-popup> -->
     </div>
 </template>
 
@@ -31,37 +25,20 @@ export default {
       name: 'mysong',
       data () {
           return {
-              setShow: true,
-              houseShow: true,
               activeNames: ['1', '2'],
-              show: true
+              sheelList: []
           }
       },
       methods: {
-          popup() {
-              this.show = true
+          more(calldata) {
+              this.$store.state.popupShow = true
+              this.$store.state.popupTitle = calldata.title
           }
       },
       mounted() {
-          console.log(this)
+          this.$ajax.get('http://musicListSheel.cn').then(res => {
+              console.log(this.sheelList = res.data.data)
+          }).catch((error) => console.log(error))
       }
   }
 </script>
-
-<style lang="scss" scoped>
-    .cell{
-        height: 10px;
-        display: flex;
-        img {
-            background-color:brown
-        }
-        .info{
-            height: 10px;
-            width:100px;
-            background-color: aqua
-        }
-        .btn{
-            background-color: bisque
-        }
-    }
-</style>
