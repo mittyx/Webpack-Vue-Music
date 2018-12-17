@@ -43,7 +43,9 @@ export default {
     mounted () {
         this.$ajax.get('http://musicList.cn').then(res => {
             this.$store.state.songList = res.data.musicListData
-            this.$store.state.audio = new Audio(res.data.musicListData[0].src)
+            let songSrc = res.data.musicListData[0].src
+            // console.log('http://localhost/' + songSrc.substring(2))
+            this.$store.state.audio = new Audio('http://120.79.222.175:80/' + songSrc.substring(2))
             this.$store.state.audio.load()
             this.$store.dispatch('getDurTime')
             this.$store.dispatch('audioEnded')

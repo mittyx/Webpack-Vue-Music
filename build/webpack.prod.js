@@ -31,7 +31,7 @@ module.exports = merge(webpackBaseConfig, {
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].css'
+            filename: './assets/css/[name].[hash:7].css'
         }),
         new UglifyJsPlugin({
             test: /\.js($|\?)/i,

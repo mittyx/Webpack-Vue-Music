@@ -16,7 +16,8 @@ export default {
         }
     },
     playCurTime: (state, val) => {
-        state.audio.currentTime = state.audio.duration * (val / 100)
+        state.audio.currentTime = state.audio.duration * val / 100;
+        console.log(state.audio.duration, state.audio.currentTime, val, state.audio)
         if (state.audio.paused) {
             state.audio.play()
             state.paused = true

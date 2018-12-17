@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     entry: {
         './public/polyfills': './public/polyfills.js',
-        mock: ['mockjs'],
-        main: './src/main.js'
+        './assets/js/mock': ['mockjs'],
+        './assets/js/main': './src/main.js'
     },
     output: {
         filename: '[name].js',
@@ -52,7 +52,10 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
-                use: [ { loader: 'url-loader', options: { limit: 1024 * 10 } } ]
+                use: [ { loader: 'url-loader', options: { 
+                    limit: 1024 * 10,
+                    name: './assets/imges/[name].[hash:7].[ext]'
+                } } ]
             }
         ]
     },
@@ -104,7 +107,7 @@ module.exports = {
                     reuseExistingChunk: true
                 },
                 commons: {
-                    name: 'commons',
+                    name: './assets/js/commons',
                     chunks: 'initial',
                     minChunks: 2
                 },
