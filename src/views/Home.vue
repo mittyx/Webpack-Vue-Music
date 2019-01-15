@@ -6,6 +6,7 @@
         <v-Musiclist></v-Musiclist>
         <v-control></v-control>
         <v-info></v-info>
+        <v-transition></v-transition>
     </div>
 </template>
 
@@ -16,6 +17,7 @@ import Nav from './nav'
 import MusicList from './musicList/MusicList'
 import Control from './control'
 import OperationInfo from './operationInfo'
+import Transition from './../components/transition'
 
 export default {
     name: 'Home',
@@ -25,7 +27,8 @@ export default {
         'v-nav': Nav,
         'v-Musiclist': MusicList,
         'v-control': Control,
-        'v-info': OperationInfo
+        'v-info': OperationInfo,
+        'v-transition': Transition
     },
     data () {
         return {

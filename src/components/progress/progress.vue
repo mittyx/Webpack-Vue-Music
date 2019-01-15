@@ -74,29 +74,5 @@ export default {
 </script>
 
 <style lang="scss">
-$music-progress: 3px;
-.musicProgress{
-  height: $music-progress;
-  width: 100%;
-  margin: auto 0;
-  background-color: #E6E6E8;
-  position: relative;
-  .ball{
-    position: absolute;
-    width: $music-progress*5;height: $music-progress*5;
-    top: -($music-progress*5 - $music-progress) / 2;
-    left: -($music-progress*5 - $music-progress) / 2;
-    border-radius: 100%;
-    background-color: white;
-    z-index: 2;
-    transition: all .05s
-  }
-  .cache{
-    position: absolute;
-    top: 0;
-    height: $music-progress;
-    background-color: #C0C0C2;
-    z-index: 1;
-  }
-}
+@import "./progress.scss"
 </style>

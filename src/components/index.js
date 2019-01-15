@@ -1,6 +1,6 @@
-import MusicProgress from './progress/progress'
-import Popup from './popup'
-import Cell from './cell'
+import MusicProgress from './progress/index'
+import Popup from './popup/index'
+import Cell from './cell/index'
 
 let components = [MusicProgress, Popup, Cell]
 

@@ -14,7 +14,9 @@
             </van-collapse-item>
              <van-collapse-item name="2">
                 <div slot="title"><van-icon name="like-o" /> 收藏的歌单</div>
-                提供多样店铺模板，快速搭建网上商城
+                <div v-for="(item, index) in sheelList">
+                    <my-cell  :title="item.title" :content="item.amount" :obj="item" :background="item.background" @btnClick="more"></my-cell>
+                </div>
             </van-collapse-item>
         </van-collapse>
     </div>
