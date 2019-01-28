@@ -2,7 +2,7 @@
 
 exports.default = {
     methods: {
-        touchStart: function touchStart (event) {
+        touchStart: function touchStart(event) {
             this.direction = ''
             this.deltaX = 0
             this.deltaY = 0
@@ -11,7 +11,7 @@ exports.default = {
             this.startX = event.touches[0].clientX
             this.startY = event.touches[0].clientY
         },
-        touchMove: function touchMove (event) {
+        touchMove: function touchMove(event) {
             var touch = event.touches[0]
             this.deltaX = touch.clientX - this.startX
             this.deltaY = touch.clientY - this.startY

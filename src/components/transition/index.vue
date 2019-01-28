@@ -1,40 +1,47 @@
+<!--
+ * @Description: 全屏动画
+ * @Author: hackLi
+ * @Date: 2019-01-11 12:49:53
+ * @LastEditTime: 2019-01-28 11:12:09
+ * @LastEditors: Please set LastEditors
+ -->
+
 <template>
-        <transition name="custom-classes-transition"
-        enter-active-class="animated fadeInUp"
-        leave-active-class="animated fadeOutDown" >
-	    <div class="fixedFullScreen"  :value="value" v-show="isShow">
-	    </div>
-        </transition>
+    <transition name="custom-classes-transition"
+    :enter-active-class="'animated '+ enterDirectionMap[direction]"
+    :leave-active-class="'animated '+ leaveDirectionMap[direction]" >
+        <div class="fixedFullScreen"  :value="value" v-show="visible">
+            <slot></slot>
+        </div>
+    </transition>
 </template>
 
 <script>
-
+import visibleMixin from '_component/mixins/visible'
 export default {
+    mixins: [visibleMixin.default],
     props: {
-        value: {
-            type: Boolean,
-            default: false
+        direction: {
+            validator: function(value) {
+                return ['up', 'down', 'left', 'right'].indexOf(value) !== -1
+            },
+            default: 'up'
         }
     },
-    data () {
+    data() {
         return {
-            isShow: false
-        }
-    },
-    watch: {
-        value (val) {
-            this.isShow = val
-        },
-        isShow (val) {
-            this.$emit('input', val)
-        }
-    },
-    methods: {
-    },
-    mounted () {
-        this.isShow = true
-        if (this.value) {
-            this.isShow = true
+            enterDirectionMap: {
+                up: 'fadeInUp',
+                down: 'fadeInDown',
+                left: 'fadeInLeft',
+                right: 'fadeInRight'
+            },
+            leaveDirectionMap: {
+                up: 'fadeOutDown',
+                down: 'fadeOutUp',
+                left: 'fadeOutLeft',
+                right: 'fadeOutRight'
+            }
         }
     }
 }

@@ -17,22 +17,17 @@ module.exports = {
     'rules': {
         'generator-star-spacing': 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-        'indent': [
-            'error',
-            4
-        ],
-        'linebreak-style': [
-            'error',
-            'windows'
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'never'
-        ],
-        'no-new' :0
+        'indent': ['error', 4],
+        'linebreak-style': ['error', 'windows'],
+        'quotes': ['error', 'single'],
+        'semi': ['error', 'never'],
+        'no-new' :0,
+        "space-before-function-paren": ["error", "never"],
+        'keyword-spacing': ["error", { "overrides": {
+            "if": { "after": false },
+            "for": { "after": false },
+            "while": { "after": false }
+        }}],
+        'vue/require-v-for-key': 'off'
     }
 };

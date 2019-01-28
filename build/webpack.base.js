@@ -66,7 +66,8 @@ module.exports = {
             '~': path.resolve(__dirname, '../src/assets/'),
             src: path.resolve(__dirname, '../src/'),
             root: path.resolve(__dirname, '../'),
-            images: path.resolve(__dirname, '../src/assets/images')
+            images: path.resolve(__dirname, '../src/assets/images'),
+            _component: path.resolve(__dirname, '../src/components')
         }
     },
     plugins: [
