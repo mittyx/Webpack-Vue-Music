@@ -1,1 +1,0 @@
-import '../../vant-css/base.css';
