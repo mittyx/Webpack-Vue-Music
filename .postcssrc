@@ -1,11 +1,8 @@
 {
-	parser: 'sugarss',
   "plugins": {
     "autoprefixer": {
       "grid": true
     },
-		'postcss-import': {},
-    'postcss-cssnext': {},
 		"postcss-write-svg": { utf8: false },
 		"postcss-px-to-viewport": {
       viewportWidth: 750,
@@ -14,8 +11,6 @@
       selectorBlackList: ['.ignore', '.hairlines'],
       minPixelValue: 1,
       mediaQuery: false
-    },
-		'cssnano': {
-		}
+    }
   }
 }
