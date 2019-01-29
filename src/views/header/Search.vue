@@ -15,12 +15,12 @@
             </div>
         </div>
         <div class="popular-search">
-            <h4 class="title">热门搜索</h4>
+            <h4 class="title test">热门搜索</h4>
             <div class="popular-search-list" >
                 <v-tag v-for="item in hotSearch" @click="onSearchBtn(item.songName)">{{ item.songName }}</v-tag>
             </div>
         </div>
-        <div class="history">
+        <div class="history" >
             <ul>
                 <li v-for="item in localData">
                     {{ item }}
@@ -96,3 +96,13 @@ export default {
     }
 }
 </script>
+<style>
+	.test {
+    border: .5px solid black;
+    border-bottom-width: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    position: relative;
+}
+
+</style>

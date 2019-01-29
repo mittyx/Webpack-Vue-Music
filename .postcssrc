@@ -1,7 +1,21 @@
 {
+	parser: 'sugarss',
   "plugins": {
     "autoprefixer": {
       "grid": true
-    }
+    },
+		'postcss-import': {},
+    'postcss-cssnext': {},
+		"postcss-write-svg": { utf8: false },
+		"postcss-px-to-viewport": {
+      viewportWidth: 750,
+      unitPrecision: 3,
+      viewportUnit: 'vw',
+      selectorBlackList: ['.ignore', '.hairlines'],
+      minPixelValue: 1,
+      mediaQuery: false
+    },
+		'cssnano': {
+		}
   }
 }
