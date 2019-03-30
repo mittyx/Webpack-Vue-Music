@@ -7,12 +7,22 @@ let song = Mock.mock('http://song.cn', {
         'songName': '@cname'
     }]
 })
-let hot = Mock.mock('http://hot.cn', {
+let hot = Mock.mock('/hotSearch', {
     'status': '0',
-    'result|10': [{
-        'id|+1': 0,
-        'songName': '@cname'
-    }]
+    // 'result|10': [{
+    //     'id|+1': 0,
+    //     'songName': '@cname'
+    // }]
+    'result': [
+        {url: '', name: '你不要担心'},
+        {url: '', name: '路过人间'},
+        {url: '', name: '绿色'},
+        {url: '', name: '花季少女101'},
+        {url: '', name: '三妻四妾'},
+        {url: '', name: '非自然死亡'},
+        {url: '', name: '山茶花'},
+        {url: '', name: 'lemon'}
+    ]
 })
 let swipes = Mock.mock('http://swipe.cn', {
     'status': '0',

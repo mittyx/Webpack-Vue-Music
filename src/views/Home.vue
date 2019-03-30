@@ -17,7 +17,6 @@ import MusicList from './musicList/MusicList'
 import Control from './control'
 import OperationInfo from './operationInfo'
 
-
 export default {
     name: 'Home',
     components: {

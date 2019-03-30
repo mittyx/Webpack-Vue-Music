@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './app.vue'
 import router from './router'
 import store from './store'
-import './plugin'
+import './use'
 import '~/css/joggle.scss'
 
 Vue.config.productionTip = false

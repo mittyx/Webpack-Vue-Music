@@ -1,10 +1,10 @@
 <template>
-    <v-transition direction="right" class="search" v-model="showSearchPopup">
+    <v-transition direction="right" class="search" :value="showSearchPopup" @change="onChange">
         <div class="search-header">
             <div class="out"><i class="icon iconfont icon-47" @click="onCancelBtn"></i></div>
             <div class="input">
                 <div class="case">
-                    <input name="search" class="inSearch" placeholder="搜索你想要的歌曲" v-model="searchVal" @keyup="searchEnter($event,searchVal)">
+                    <input name="search" class="inSearch" placeholder="搜索你想要的歌曲" v-model="searchVal">
                     <ul>
                         <li>{{ searchVal }}</li>
                         <li v-for="item in searchSong">
@@ -17,10 +17,11 @@
         <div class="popular-search">
             <h4 class="title">热门搜索</h4>
             <div class="popular-search-list" >
-                <v-tag v-for="item in hotSearch" @click="onSearchBtn(item.songName)">{{ item.songName }}</v-tag>
+                <v-tag v-for="item in hotSearch" @click.native="onSearchBtn(item.name)">{{ item.name }}</v-tag>
             </div>
         </div>
         <div class="history">
+            <h4 class="title">历史记录</h4>
             <ul>
                 <li v-for="item in localData">
                     {{ item }}
@@ -55,6 +56,11 @@ export default {
             this.$ajax.get('http://song.cn')
                   .then((res) => { this.searchSong = res.data.result })
                   .catch((error) => { console.log(error) })
+        },
+        localData(val) {
+            if(val.length > 6) {
+                this.localData.length = 6
+            }
         }
     },
     computed: {
@@ -72,27 +78,37 @@ export default {
             this.showSearchPopup = false
             this.$router.push('/')
         },
-        showSearchList(val) {
-            this.newLocalStorageCLass.addValue(val)
-            this.localData = this.newLocalStorageCLass.getValue()
-            localStorage.setItem('localData', JSON.stringify(this.localData))
+        onSearchBtn(song) {
+            let proxy = [...this.localData]
+            proxy = new Set(proxy)
+            if(proxy.has(song)) {
+                proxy.delete(song)
+            }
+            proxy = [...proxy]
+            proxy.unshift(song);
+            this.localData = proxy
         },
-        onSearchBtn (song) {
-            this.$options.methods.showSearchList.call(this,song)
-        },
-        searchEnter (e, val) {
-            if (e.keyCode == 13) {
-                this.$options.methods.showSearchList.call(this,song)
+        onChange(value) {
+            if(value) {
+                window.localStorage.setStorage('hotSearch', this.localData)
             }
         }
     },
     mounted () {
-        this.$ajax.get('http://hot.cn')
+        let storage = window.localStorage
+        this.$ajax.get('/hotSearch')
             .then((res) => { this.hotSearch = res.data.result })
             .catch((error) => { console.log(error) }
         )
-        this.newLocalStorageCLass = new LocalStorageCLass()
-        this.localData = this.newLocalStorageCLass.getValue()
+        if(!storage.getItem('hotSearch')) {
+            storage.setStorage('hotSearch', [])
+        }
+        // 判断Storage是否为空
+        if(storage.getStorage('hotSearch') === "") {
+            this.localData = []
+        } else {
+            this.localData = storage.getStorageArray('hotSearch').reverse();
+        }
     }
 }
 </script>

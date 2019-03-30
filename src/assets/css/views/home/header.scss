@@ -43,13 +43,13 @@
 		box-sizing: border-box;
 		width:$meun-list-width;
 		background-color:$color-background-meun;
-		.hair{
+		.meun-header{
 			margin:0 .2rem .2rem .2rem;
 			width:2.5rem;height:2.5rem;
 			background-color:#666;
 			border-radius:100%;
 		}
-		.meData{
+		.meun-info{
 			height:0.64rem;
 			text-align:center;
 			display:flex;
@@ -63,7 +63,7 @@
 				line-height:0.6rem;
 				font-size: .7rem
 			}
-			.nickName{
+			.userName{
 				padding-left: .4rem;
 				line-height: 0.64rem;
 			}
@@ -129,16 +129,17 @@
 			}
 
 		}
-	}
+    }
+    .title{
+        font-size: 14px;
+        height:0.8rem;
+        padding: 5px 15px;
+        line-height:0.8rem;
+        font-weight: 500;
+    }
 	.popular-search{
 		height:5.6rem;
-		.title{
-            font-size: 16px;
-			height:0.8rem;
-			padding: 5px 15px;
-            line-height:0.8rem;
-            font-weight: 500;
-		}
+
 		.popular-search-list{
 			padding:0 1.4rem 0 0.48rem;
 			display:flex;

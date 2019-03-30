@@ -1,13 +1,13 @@
 <template>
-    <transition 
+    <transition
     name="slides"
     enter-active-class="animated slideInLeft"
     leave-active-class="animated slideOutLeft">
-        <div class="meun" :value="value" v-show="meunShow">
+        <div class="meun" :value="value" v-if="isShowMeun">
             <div class="personal">
-                <img src="../../assets/images/head.png" class="hair">
-                <div class="meData">
-                    <div class="nickName">灬夏影</div>
+                <img src="../../assets/images/head.png" class="meun-header">
+                <div class="meun-info">
+                    <div class="userName">灬夏影</div>
                     <i class="icon iconfont icon-ic_userlevel_ levelIcon"></i>
                 </div>
             </div>
@@ -41,22 +41,14 @@ export default {
             default: false
         }
     },
-    data () {
-        return {
-            meunShow: false
+    computed: {
+        isShowMeun() {
+            return this.value
         }
     },
     watch: {
         value (val) {
-            this.meunShow = val
-        },
-        meunShow (val) {
             this.$emit('input', val)
-        }
-    },
-    mounted () {
-        if (this.value) {
-            this.meunShow = true
         }
     }
 }

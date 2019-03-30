@@ -10,7 +10,7 @@
             <time class="curTime">{{ getDurTime }}</time>
         </div>
         <div class="module-control">
-            <i class="icon iconfont" :class="getPlayMode" @click.stop = "setPlayMode"></i>
+            <i class="icon iconfont" :class="getPlayMode" @click.stop="setPlayMode"></i>
             <i class="icon iconfont icon-icon-4" @click.stop = "prev"></i>
             <i :class="[ paused ?  'icon-icon-5' : 'icon-icon-2', 'icon', 'iconfont']" @click.stop = "playPaused"></i>
             <i class="icon iconfont icon-icon-3" @click.stop = "next"></i>
@@ -31,42 +31,42 @@ export default{
         }
     },
     computed:{
-        ...mapState([
-            'paused'
+        ...mapState('moduleAudio', [
+            'paused',
         ]),
-        ...mapGetters([
+        ...mapGetters('moduleAudio', [
             'getPlayMode'
         ]),
         getCurTime() {
-            return formatDate( parseInt(this.$store.state['getCurTime']) )
+            return formatDate( parseInt(this.$store.state.moduleAudio['getCurTime']) )
         },
         getDurTime() {
-            return formatDate( parseInt(this.$store.getters['getDurTime']) )
+            return formatDate( parseInt(this.$store.getters['moduleAudio/getDurTime']) )
         }
     },
     watch: {
         getCurTime(val) {
-           this.progressValue = Math.round( (this.$store.state['getCurTime'] / this.$store.getters['getDurTime']) *100)
+           this.progressValue = Math.round( (this.$store.state.moduleAudio['getCurTime'] / this.$store.getters['moduleAudio/getDurTime']) *100)
         }
     },
     methods: {
-        ...mapMutations([
+        ...mapMutations('moduleAudio', [
             'playPaused'
         ]),
-        ...mapActions([
+        ...mapActions('moduleAudio', [
             'next',
             'prev'
         ]),
         setPlayMode(){
-            if(this.$store.state['playMode'] < 2) {
-                this.$store.state['playMode']++
+            if(this.$store.state.moduleAudio['playMode'] < 2) {
+                this.$store.state.moduleAudio['playMode']++
             }else {
-                this.$store.state['playMode'] = 0
+                this.$store.state.moduleAudio['playMode'] = 0
             }
         },
         onChange(value) {
             this.progressValue = value
-            this.$store.commit('playCurTime', value)
+            this.$store.commit('moduleAudio/playCurTime', value)
         }
     }
 }

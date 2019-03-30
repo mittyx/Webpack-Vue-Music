@@ -30,12 +30,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tag{
-    height: 34px;
+    height: 30px;
     padding: 0 16px;
     background-color: #DCDCDC;
     border-radius:17.5px;
     box-sizing: border-box;
-    line-height: 34px;
+    line-height: 30px;
     text-align: center;
     span{
         font-size: 14px;

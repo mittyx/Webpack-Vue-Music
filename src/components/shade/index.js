@@ -1,81 +1,29 @@
-import Observer from '../mixins/Observer'
-
-const ClassName = {
-    ANIMATION: 'shadeAnimation',
-    SHADE: 'shade'
-
+function Shade(option = {}) {
+    this.elemment = document.createElement('div')
+    this.callback = null
+    this.init()
 }
-
-function _shadeStyle (dom) {
-    dom.classList.add(ClassName.SHADE)
-}
-
-function _addClick (shadeObj) {
-    shadeObj.dom.onclick = function (e) {
-        shadeObj.off()
-    }
-    return false
-}
-
-// let shade = {
-//     dom: null,
-//     on: function (callBack) {
-//         console.log(callBack)
-//         if (!this.dom) {
-//             this.dom = document.createElement('div')
-//             _shadeStyle(this.dom)
-//             _addClick(this, callBack)
-//             document.body.insertBefore(this.dom, document.body.childNodes[0])
-
-//             // 添加动画
-//             this.dom.classList.add(ClassName.ANIMATION)
-
-//             // 设置定时器
-//             // if (time && typeof time === 'number') {
-//             //     setTimeout(() => {
-//             //         this.off()
-//             //     }, time)
-//             // }
-//         }
-//     },
-//     off: function () {
-//         if (this.dom) {
-//             document.body.removeChild(this.dom)
-//             this.dom = null
-//         }
-//     }
-// }
-
-class Shade extends Observer {
-    constructor () {
-        super()
-        this.dom = null
-    }
-    add (time) {
-        if (!this.dom) {
-            this.dom = document.createElement('div')
-            _shadeStyle(this.dom)
-            _addClick(this)
-            document.body.insertBefore(this.dom, document.body.childNodes[0])
-
-            // 添加动画
-            this.dom.classList.add(ClassName.ANIMATION)
-
-            // 设置定时器
-            if (time && typeof time === 'number') {
-                setTimeout(() => {
-                    this.off()
-                }, time)
-            }
+Shade.prototype = {
+    init() {
+        this.elemment.classList.add('shade')
+        this.elemment.onclick = () => {
+            this.removeShade()
         }
-    }
-    off () {
-        if (this.dom) {
-            super.trigger('callback')
-            document.body.removeChild(this.dom)
-            this.dom = null
+    },
+    addShade(animation, callback =function() {}) {
+        if(animation === true) {
+            this.elemment.classList.add('shadeAnimation')
+        }
+        this.callback = callback
+        document.body.insertBefore(this.elemment, document.body.childNodes[0])
+    },
+    removeShade() {
+        if(this.elemment) {
+            document.body.removeChild(this.elemment)
+            this.callback()
         }
     }
 }
 
 export default new Shade()
+

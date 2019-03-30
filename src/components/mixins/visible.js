@@ -8,18 +8,13 @@ exports.default = {
         }
     },
     computed: {
-        visible: {
-            get() {
-                return this.value
-            },
-            set(val) {
-                this.$emit('input', val)
-            }
+        visible() {
+            return this.value;
         }
     },
-    mounted() {
-        if(this.value) {
-            this.visible = true
+    watch: {
+        value (val) {
+            this.$emit('change', val)
         }
     }
 }

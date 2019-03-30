@@ -5,6 +5,8 @@ import myComponents from 'src/components'
 import { Swipe, SwipeItem, Tab, Tabs, Cell, CellGroup, Collapse, CollapseItem, Progress, Slider, Icon, Popup } from 'vant'
 
 import shade from 'src/components/shade'
+import 'src/components/util/object'
+import 'src/components/util/storage'
 
 // 全局axios
 Vue.prototype.$ajax = axios

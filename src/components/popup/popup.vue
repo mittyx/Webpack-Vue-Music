@@ -1,5 +1,5 @@
 <template>
-    <transition 
+    <transition
         name="slides"
         :enter-active-class="'animated ' + setEnterClass"
         :leave-active-class="'animated ' + setLeaveClass">
@@ -58,9 +58,9 @@ export default {
     mounted() {
         this.setEnterClass = this.FADE_IN[this.position]
         this.setLeaveClass = this.FADE_OUT[this.position]
-        this.$shade.listen('callback', () => {
-            this.proxyShow = false
-        })
+        // this.$shade.listen('callback', () => {
+        //     this.proxyShow = false
+        // })
     }
 }
 </script>

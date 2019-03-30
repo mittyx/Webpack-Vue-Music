@@ -13,7 +13,7 @@
             </header>
             <div class="play-lrc">
                 <ul :style="{ transform : transform }"  ref="lrcUl">
-                    <li class="lrc-li" v-for="(val, key) in lrcLi.obj" 
+                    <li class="lrc-li" v-for="(val, key) in lrcLi.obj"
                     :data-time="key">{{ val }}</li>
                 </ul>
             </div>
@@ -47,10 +47,10 @@ export default {
         'play-operate': PlayOperate
     },
     computed: {
-        ...mapState([
+        ...mapState('moduleAudio', [
             'getCurTime'
         ]),
-        ...mapGetters([
+        ...mapGetters('moduleAudio', [
             'curPlaySingerName',
             'curPlaySongName'
         ])
@@ -67,7 +67,7 @@ export default {
             lrc => { this.lrcLi = lrcRegular(lrc) } // 获取对象歌词链式调用
         )
         let _this = this, index = 0;
-        this.$store.state.audio.ontimeupdate = function(){
+        this.$store.state.moduleAudio.audio.ontimeupdate = function(){
             _this.$store.state.getCurTime = this.currentTime
             for (let i in _this.lrcLi.regularTime) {
                 if (formatDate(parseInt(this.currentTime)) === _this.lrcLi.regularTime[i]) {

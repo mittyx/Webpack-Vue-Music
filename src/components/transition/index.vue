@@ -2,15 +2,15 @@
  * @Description: 全屏动画
  * @Author: hackLi
  * @Date: 2019-01-11 12:49:53
- * @LastEditTime: 2019-01-28 11:12:09
+ * @LastEditTime: 2019-03-30 16:34:06
  * @LastEditors: Please set LastEditors
  -->
 
 <template>
     <transition name="custom-classes-transition"
     :enter-active-class="'animated '+ enterDirectionMap[direction]"
-    :leave-active-class="'animated '+ leaveDirectionMap[direction]" >
-        <div class="fixedFullScreen"  :value="value" v-show="visible">
+    :leave-active-class="'animated '+ leaveDirectionMap[direction]">
+        <div class="fixedFullScreen" :value="value" v-if="visible">
             <slot></slot>
         </div>
     </transition>
