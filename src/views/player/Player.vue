@@ -81,9 +81,7 @@ export default {
         if(this.audio === null) {
             this.$ajax.get('/player/list').then(res => {
                 this.$store.state.moduleAudio.songList = res.data.musicListData
-                this.$store.commit('moduleAudio/start')
-                this.$store.dispatch('moduleAudio/getDurTime')
-                this.$store.dispatch('moduleAudio/audioEnded')
+                this.$store.dispatch('moduleAudio/start')
                 this.$store.dispatch('moduleAudio/audioTimeUpdate', {callback: this.lyricScroll})
             })
         } else{

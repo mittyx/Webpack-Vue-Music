@@ -13,6 +13,7 @@ export default{
         curPlayIndex: 0,
     },
     actions: {
+<<<<<<< HEAD
         getDurTime: ({ state }) => {
             setInterval(function(){
                 state.duration = state.audio.duration;
@@ -22,6 +23,19 @@ export default{
             })
             state.audio.addEventListener('loadedmetadata', function() {
                 state.duration = this.duration
+=======
+        start: ({state, dispatch}) => {
+            let songSrc = state.songList[state.curPlayIndex].src
+            state.audio = new Audio(`/${songSrc.substring(2)}`)
+            state.audio.load()
+            dispatch('getDurTime')
+            dispatch('audioEnded')
+        },
+        getDurTime: ({ commit, state }) => {
+            state.audio.addEventListener('canplay', function() {
+                console.log('加载完毕')
+                commit('setDurationTime', this)
+>>>>>>> origin/master
             })
         },
         next: ({ commit, state, getters }) => {
