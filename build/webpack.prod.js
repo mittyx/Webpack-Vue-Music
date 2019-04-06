@@ -36,7 +36,7 @@ module.exports = merge(webpackBaseConfig, {
         new UglifyJsPlugin({
             test: /\.js($|\?)/i,
             uglifyOptions: {
-                warnings: false,
+                warnings: true,
                 compress: {
                     drop_debugger: true,// 去除debugger
                     warnings: true,

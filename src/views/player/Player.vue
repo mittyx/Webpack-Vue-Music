@@ -33,6 +33,7 @@ export default {
         next(vm => {
             // 通过 `vm` 访问组件实例
             vm.controlShow = true
+
         })
     },
     data () {
@@ -48,36 +49,44 @@ export default {
     },
     computed: {
         ...mapState('moduleAudio', [
-            'getCurTime'
+            'getCurTime',
+            'audio',
         ]),
         ...mapGetters('moduleAudio', [
             'curPlaySingerName',
-            'curPlaySongName'
+            'curPlaySongName',
+            'getCurrentTime'
         ])
     },
     methods: {
         homeShow () {
             this.$store.state.homeScroll = 'visible'
             this.$router.push({ name: 'Home' })
+        },
+        lyricScroll(that) {
+            for (let index in this.lrcLi.regularTime) {
+                if ( this.getCurrentTime === this.lrcLi.regularTime[index]) {
+                    for(let element of this.$refs.lrcUl.children){
+                        element.className = ''
+                    }
+                    this.$refs.lrcUl.children[index].className = 'active'
+                    this.transform = `translate3d(0,-${index * 0.8}rem,0)`
+                }
+            }
         }
     },
     mounted () {
-        // 获取歌词
         myAjax(require('~/music/yzhaj.lrc'), true).then(
             lrc => { this.lrcLi = lrcRegular(lrc) } // 获取对象歌词链式调用
         )
-        let _this = this, index = 0;
-        this.$store.state.moduleAudio.audio.ontimeupdate = function(){
-            _this.$store.state.getCurTime = this.currentTime
-            for (let i in _this.lrcLi.regularTime) {
-                if (formatDate(parseInt(this.currentTime)) === _this.lrcLi.regularTime[i]) {
-                    for(let dom of _this.$refs.lrcUl.children){
-                        dom.className = ''
-                    }
-                    _this.$refs.lrcUl.children[i].className = 'active'
-                    _this.transform = `translate3d(0,-${i * 0.8}rem,0)`
-                }
-            }
+        if(this.audio === null) {
+            this.$ajax.get('/player/list').then(res => {
+                this.$store.state.moduleAudio.songList = res.data.musicListData
+                this.$store.dispatch('moduleAudio/start')
+                this.$store.dispatch('moduleAudio/audioTimeUpdate', {callback: this.lyricScroll})
+            })
+        } else{
+            this.$store.dispatch('moduleAudio/audioTimeUpdate', {callback: this.lyricScroll})
         }
     }
 }
