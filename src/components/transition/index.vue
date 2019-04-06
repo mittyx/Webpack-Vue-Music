@@ -2,7 +2,7 @@
  * @Description: 全屏动画
  * @Author: hackLi
  * @Date: 2019-01-11 12:49:53
- * @LastEditTime: 2019-03-30 16:34:06
+ * @LastEditTime: 2019-04-06 17:24:13
  * @LastEditors: Please set LastEditors
  -->
 
@@ -47,9 +47,5 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.fixedFullScreen{
-    position:fixed;
-	top:0;bottom:0;right:0;left:0;z-index: 3;
-	background-color:#fff;
-}
+@import "./transition.scss"
 </style>

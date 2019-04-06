@@ -41,15 +41,11 @@ export default {
         }
     },
     mounted () {
-        this.$ajax.get('http://musicList.cn').then(res => {
+        this.$ajax.get('/player/list').then(res => {
             this.$store.state.moduleAudio.songList = res.data.musicListData
-            let songSrc = res.data.musicListData[0].src
-            // console.log('http://localhost/' + songSrc.substring(2))
-            this.$store.state.moduleAudio.audio = new Audio('http://120.79.222.175:80/' + songSrc.substring(2))
-            this.$store.state.moduleAudio.audio.load()
+            this.$store.commit('moduleAudio/start')
             this.$store.dispatch('moduleAudio/getDurTime')
             this.$store.dispatch('moduleAudio/audioEnded')
-            this.$store.state.moduleAudio.curPlayIndex = 0
         })
     }
 }

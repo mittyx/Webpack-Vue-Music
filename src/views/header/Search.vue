@@ -17,7 +17,7 @@
         <div class="popular-search">
             <h4 class="title">热门搜索</h4>
             <div class="popular-search-list" >
-                <v-tag v-for="item in hotSearch" @click.native="onSearchBtn(item.name)">{{ item.name }}</v-tag>
+                <v-tag v-for="item in hotSearch" to="/player/yzhaj" @click="onSearchBtn(item.name)">{{ item.name }}</v-tag>
             </div>
         </div>
         <div class="history">

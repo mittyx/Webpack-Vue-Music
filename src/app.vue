@@ -16,6 +16,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  // @import "~/css/joggle.scss"
+//   @import "~/css/joggle.scss"
 </style>
 

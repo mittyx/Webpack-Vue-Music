@@ -22,24 +22,19 @@ module.exports = merge(webpackBaseConfig, {
                     'sass-loader'
                 ]
             }
-            // {
-            //     test: /\.css$/,
-            //     use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'postcss-loader']
-            // }
         ]
     },
     plugins: [
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
-            filename: './assets/css/[name].[hash:7].css'
+            filename: '[name].css'
         }),
         new UglifyJsPlugin({
             test: /\.js($|\?)/i,
             uglifyOptions: {
                 warnings: false,
                 compress: {
-                    drop_debugger: true,// 去除debugger
-                    warnings: true,
+                    drop_debugger: true// 去除debugger
                 }
             },
             parallel: true

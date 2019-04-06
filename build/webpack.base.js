@@ -52,7 +52,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
-                use: [ { loader: 'url-loader', options: { 
+                use: [ { loader: 'url-loader', options: {
                     limit: 1024 * 10,
                     name: './assets/imges/[name].[hash:7].[ext]'
                 } } ]
